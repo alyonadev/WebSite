@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Авторизация";
+    Layout = "~/Views/Shared/AuthorizationLayout.cshtml";
+}
+
+<h1>Авторизация</h1>
+
+@Html.ValidationSummary(true)
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card" style="max-width: 480px;">        
+
+        <div class="card-body">
+            <div>@Html.Raw(ViewData["Message"])</div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" name="login" placeholder="Логин" required/><br />
+                <input type="password" class="form-control" name="password" placeholder="Пароль" required/><br />
+            </div>
+            <button type="submit" class="btn btn-success">Подтвердить</button>
+        </div>
+
+    </div>
+}
+

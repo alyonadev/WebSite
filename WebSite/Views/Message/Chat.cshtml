@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+}
+
+<form>
+    <div class="form-group">
+        <label for="message" style="font-size: 18pt;">Сообщение</label>
+        <textarea id="message" class="form-control" rows="3" placeholder="Сообщение..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-success" id="sendmessage">Отправить</button>
+    <div class="container">
+        <input type="hidden" id="displayname" />
+        <ul id="discussion"></ul>
+    </div>
+</form>
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            var chat = $.connection.chatHub;
+            
+            chat.client.addNewMessageToPage = function (name, message) {
+                $('#discussion').append('<ul><li>' + htmlEncode(name) + ': '  + htmlEncode(message) + '</li></ul>');
+            };
+            
+            $('#displayname').val(prompt('Enter your name:', ''));
+            $('#message').focus();
+            
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    chat.server.send($('#displayname').val(), $('#message').val());
+                    $('#message').val('').focus();
+                });
+            });
+        });
+        
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+}
+
+
+

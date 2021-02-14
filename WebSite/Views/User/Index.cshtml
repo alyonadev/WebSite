@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Профиль";
+}
+
+<br/>
+<table width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+        <td width="350">
+            @if (@ViewBag.UserImage == null)
+            {
+            <img src="~/img/defaultPhoto.jpg" style="height: 350px; width: 350px;" />
+            }
+            else
+            {
+                <img src="@ViewBag.UserImage" style="height: 350px; width: 350px;" />
+            }
+        </td>
+        <td style="vertical-align: top; padding-left: 10px;">
+            <p style="font-size:  26pt;"><b>@Model.Surname @Model.Name</b></p>
+            <p style="font-size:  14pt;">Возраст: @Model.Age</p>
+            <p style="font-size:  14pt;">Адрес: @Model.Address</p>
+        </td>
+    </tr>
+</table>
+
+<br />
+
+<div>
+    <button type="submit" class="btn btn-primary" onclick="window.open('@Url.Action("Edit", "User")')">Редактировать</button>
+    <button type="submit" class="btn btn-danger" onclick="window.open('@Url.Action("Delete", "User")')">Удалить</button>
+</div>
+
+
+
+

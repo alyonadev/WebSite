@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Сообщения";
+}
+
+<h2>Сообщения</h2>
+<form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2">
+        <input class="form-control" type="text" placeholder="Фамилия Имя">
+        <button type="submit" class="btn btn-primary">Поиск</button>
+    </div>
+</form>
+
+<h2>Пользователи</h2>
+
+<table class="table">
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td width="100">
+                @if (@ViewBag.UserImage == null)
+                {
+                    <img src="~/img/defaultPhoto.jpg" style="height: 100px; width: 100px;" />
+                }
+                else
+                {
+                    <img src="@ViewBag.UserImage" style="height: 100px; width: 100px;" />
+                }
+                
+                @user.Surname @user.Name
+            </td>
+            <td>some text...</td>
+            <td align="right">
+                <button type="submit" class="btn btn-success" onclick="window.open('@Url.Action("Chat", "Message")')">Открыть чат</button>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+

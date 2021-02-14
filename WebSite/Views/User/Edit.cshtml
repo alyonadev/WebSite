@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Редактирование пользователя";
+}
+
+<h1>Редактирование пользователя</h1>
+
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <input type="hidden" value="@Model.UserId" name="UserId" />
+
+        <label for="inputName">Имя</label>
+        <input type="text" class="form-control" id="inputName" name="name" value="@Model.Name" required />
+
+        <label for="inputSurname">Фамилия</label>
+        <input type="text" class="form-control" id="inputSurname" name="surname" value="@Model.Surname" required />
+
+        <label for="inputAddress">Адрес</label>
+        <input type="text" class="form-control" id="inputAddress" name="address" value="@Model.Address" required />
+
+        <label for="inputAge">Возраст</label>
+        <input type="number" class="form-control" id="inputAge" name="age" value="@Model.Age" required />
+
+        <label for="inputPassword">Пароль</label>
+        <input type="password" class="form-control" id="inputPassword" name="password" value="@Model.Password" required />
+
+        <label for="inputLogin">Логин</label>
+        <input type="text" class="form-control" id="inputLogin" name="login" value="@Model.Login" required />
+
+        <label for="inputPhotoFile">Фотография</label>
+        <input type="file" class="form-control-file" id="inputPhotoFile"  name="photo">
+    </div>
+
+    <button type="submit" class="btn btn-success">Обновить</button>
+}

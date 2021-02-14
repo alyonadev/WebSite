@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/AuthorizationLayout.cshtml";
+}
+
+<h1>Регистрация</h1>
+
+@using (Html.BeginForm("Register", "Authorization", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <br />
+            <label for="inputName">Имя</label>
+            <input type="text" class="form-control" id="inputName" name="name" required />
+
+            <label for="inputSurname">Фамилия</label>
+            <input type="text" class="form-control" id="inputSurname" name="surname" required />
+
+            <label for="inputAddress">Адрес</label>
+            <input type="text" class="form-control" id="inputAddress" name="address" required />
+
+            <label for="inputAge">Возраст</label>
+            <input type="number" class="form-control" id="inputAge" name="age" required />
+
+            <label for="inputPassword">Пароль</label>
+            <input type="password" class="form-control" id="inputPassword" name="password" required />
+
+            <label for="inputLogin">Логин</label>
+            <input type="text" class="form-control" id="inputLogin" name="login" required />
+
+            <label for="inputPhotoFile">Фотография</label>
+            <input type="file" class="form-control-file" id="inputPhotoFile" name="photofile" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Подтвердить</button>
+    </div>
+}
+
+
