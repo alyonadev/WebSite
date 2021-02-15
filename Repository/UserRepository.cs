@@ -13,7 +13,7 @@ namespace WebSite.Repository
         private readonly WebSiteContext _context;
 
         public UserRepository(WebSiteContext context)
-        {
+        {            
             _context = context;
         }
         public IEnumerable<User> GetAll()
@@ -71,6 +71,13 @@ namespace WebSite.Repository
             Dispose(true);
 
             GC.SuppressFinalize(this);
+        }
+        public byte[] GetPhoto(HttpPostedFileBase photoFile)
+        {
+            byte[] photoData = new byte[photoFile.ContentLength];
+            photoFile.InputStream.Read(photoData, 0, photoFile.ContentLength);
+
+            return photoData;
         }
     }
 }

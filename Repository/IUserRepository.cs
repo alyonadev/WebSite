@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Web;
 using WebSite.Models;
 
 namespace WebSite.Repository
@@ -8,5 +9,6 @@ namespace WebSite.Repository
     {
         User FirstOrDefault(Expression<Func<User, bool>> predicate);
         User FirstOrDefault();
+        byte[] GetPhoto(HttpPostedFileBase file);
     }
 }

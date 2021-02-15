@@ -54,12 +54,8 @@ namespace WebSite.Controllers
         [HttpPost]
         public ActionResult Edit(UserInit updatedUser)
         {
-            if (updatedUser.Photo != null)
-            {
-                byte[] photoData = new byte[updatedUser.PhotoFile.ContentLength];
-                updatedUser.PhotoFile.InputStream.Read(photoData, 0, updatedUser.PhotoFile.ContentLength);
-                updatedUser.Photo = photoData;
-            }
+            if (updatedUser.PhotoFile != null)
+                updatedUser.Photo = _userService.GetPhoto(updatedUser.PhotoFile);
 
             _userService.Update(updatedUser);
 

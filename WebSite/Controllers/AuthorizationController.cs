@@ -16,7 +16,7 @@ namespace WebSite.Controllers
 				Неверный логин или пароль.
 			</div>";
 
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public AuthorizationController(IUserService userService)
         {
@@ -40,6 +40,7 @@ namespace WebSite.Controllers
             {
                 var user = _userService.FirstOrDefault(
                     u => u.Login == login && u.Password == password);
+
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.UserId.ToString(), true);
@@ -78,17 +79,14 @@ namespace WebSite.Controllers
             {
                 var usr = _userService.FirstOrDefault(
                     u => u.Login == newUser.Login && u.Password == newUser.Password);
-                if (usr == null)
-                {
-                    if (newUser.PhotoFile != null)
-                    {
-                        byte[] photoData = new byte[newUser.PhotoFile.ContentLength];
-                        newUser.PhotoFile.InputStream.Read(photoData, 0, newUser.PhotoFile.ContentLength);
-                        newUser.Photo = photoData;
-                    }
 
-                    _userService.Add(newUser);
+                if (usr == null)
+                {                  
+                    if (newUser.PhotoFile != null)
+                        newUser.Photo = _userService.GetPhoto(newUser.PhotoFile);
                     
+                    _userService.Add(newUser);
+
                     FormsAuthentication.SetAuthCookie(newUser.UserId.ToString(), true);
 
                     return RedirectToAction("Index", "User");

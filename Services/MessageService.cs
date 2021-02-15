@@ -8,10 +8,42 @@ using WebSite.Repository;
 
 namespace Services
 {
-    public class MessageService : MessageRepository, IMessageRepository
+    public class MessageService : IMessageService
     {
-        public MessageService(WebSiteContext context) : base(context)
+        private readonly IMessageRepository _messageRepository;
+        public MessageService(IMessageRepository messageRepository)
         {
+            _messageRepository = messageRepository;
+        }
+
+        public void Add(Message item)
+        {
+            _messageRepository.Add(item);
+        }
+
+        public void Delete(int id)
+        {
+            _messageRepository.Delete(id);
+        }
+
+        public void Dispose()
+        {
+            _messageRepository.Dispose();
+        }
+
+        public IEnumerable<Message> GetAll()
+        {
+            return _messageRepository.GetAll();
+        }
+
+        public Message GetById(int id)
+        {
+            return _messageRepository.GetById(id);
+        }
+
+        public void Update(Message item)
+        {
+            _messageRepository.Update(item);
         }
     }
 }
