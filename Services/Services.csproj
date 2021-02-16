@@ -49,9 +49,9 @@
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
+    <ProjectReference Include="..\Models\DBModels.csproj">
       <Project>{DD727461-BFE8-48DE-B8CF-D9FC3A55693F}</Project>
-      <Name>Models</Name>
+      <Name>DBModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{dfa59423-7c40-4352-a2e6-3ea4cb49ed2c}</Project>

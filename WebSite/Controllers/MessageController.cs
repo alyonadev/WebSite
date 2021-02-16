@@ -22,7 +22,7 @@ namespace WebSite.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var users = _userService.GetAll();
+            var users = _userService.GetAllService();
 
             foreach (var user in users)
             {

@@ -28,7 +28,7 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId)) 
             {
-                var user = _userService.GetById(userId);
+                var user = _userService.GetByIdService(userId);
 
                 if (user.Photo != null)
                 {
@@ -46,18 +46,18 @@ namespace WebSite.Controllers
         public ActionResult Edit()
         {
             if (int.TryParse(User.Identity.Name, out int userId))
-                return View(_userService.GetById(userId));
+                return View(_userService.GetByIdService(userId));
             else
                 return RedirectToAction("Index", "User");
         }
 
         [HttpPost]
-        public ActionResult Edit(UserInit updatedUser)
+        public ActionResult Edit(UserModel updatedUser)
         {
             if (updatedUser.PhotoFile != null)
-                updatedUser.Photo = _userService.GetPhoto(updatedUser.PhotoFile);
+                updatedUser.Photo = _userService.GetPhotoService(updatedUser.PhotoFile);
 
-            _userService.Update(updatedUser);
+            _userService.UpdateService(updatedUser.ToUser(updatedUser));
 
             return View(updatedUser);
         }
@@ -69,7 +69,7 @@ namespace WebSite.Controllers
             if (int.TryParse(User.Identity.Name, out int userId))
             {
                 FormsAuthentication.SignOut();
-                _userService.Delete(userId);
+                _userService.DeleteService(userId);
 
                 return RedirectToAction("Login", "Authorization");
             }

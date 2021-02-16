@@ -36,16 +36,6 @@ namespace WebSite.Repository
             _context.SaveChanges();
         }
 
-        public virtual User FirstOrDefault(Expression<Func<User, bool>> predicate)
-        {
-            return _context.Users.FirstOrDefault(predicate);
-        }
-
-        public User FirstOrDefault()
-        {
-            return _context.Users.FirstOrDefault();
-        }
-
         public void Delete(int userId)
         {
             User user = _context.Users.Find(userId);
@@ -72,12 +62,6 @@ namespace WebSite.Repository
 
             GC.SuppressFinalize(this);
         }
-        public byte[] GetPhoto(HttpPostedFileBase photoFile)
-        {
-            byte[] photoData = new byte[photoFile.ContentLength];
-            photoFile.InputStream.Read(photoData, 0, photoFile.ContentLength);
 
-            return photoData;
-        }
     }
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite", "WebSite.csproj", "{D1F748C7-CA85-4ECA-97A8-090F45065B02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "..\Models\Models.csproj", "{DD727461-BFE8-48DE-B8CF-D9FC3A55693F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBModels", "..\Models\DBModels.csproj", "{DD727461-BFE8-48DE-B8CF-D9FC3A55693F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "..\Repository\Repository.csproj", "{DFA59423-7C40-4352-A2E6-3EA4CB49ED2C}"
 EndProject

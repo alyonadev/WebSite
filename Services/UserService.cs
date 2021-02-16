@@ -18,49 +18,43 @@ namespace Services
         {
             _userRepository = userRepository;
         }
-        public void Add(User item)
+        public void AddService(User item)
         {
             _userRepository.Add(item);
         }
 
-        public void Delete(int id)
+        public void DeleteService(int id)
         {
             _userRepository.Delete(id);
         }
 
-        public void Dispose()
+        public void DisposeService()
         {
             _userRepository.Dispose();
         }
 
-        public User FirstOrDefault(Expression<Func<User, bool>> predicate)
+        public List<User> GetAllService()
         {
-            return _userRepository.FirstOrDefault(predicate);
+            IEnumerable<User> userList = _userRepository.GetAll();
+            return userList.ToList();
         }
 
-        public User FirstOrDefault()
-        {
-            return _userRepository.FirstOrDefault();
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            return _userRepository.GetAll();
-        }
-
-        public User GetById(int id)
+        public User GetByIdService(int id)
         {
             return _userRepository.GetById(id);
         }
 
-        public void Update(User item)
+        public void UpdateService(User item)
         {
             _userRepository.Update(item);
         }
 
-        public byte[] GetPhoto(HttpPostedFileBase photoFile)
+        public byte[] GetPhotoService(HttpPostedFileBase photoFile)
         {
-            return _userRepository.GetPhoto(photoFile);
+            byte[] photoData = new byte[photoFile.ContentLength];
+            photoFile.InputStream.Read(photoData, 0, photoFile.ContentLength);
+
+            return photoData;
         }
 
 

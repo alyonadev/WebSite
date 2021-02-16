@@ -5,7 +5,8 @@ using System.Web;
 
 namespace WebSite.Models
 {
-    public class UserInit
+    
+    public class UserModel
     {
         public int? UserId { get; set; }
 
@@ -24,5 +25,23 @@ namespace WebSite.Models
         public string Address { get; set; }
 
         public string Login { get; set; }
+
+        public User ToUser(UserModel userModel) 
+        {
+            User newUser = new User
+            {
+                Name = userModel.Name,
+                Surname = userModel.Surname,
+                Address = userModel.Address,
+                Age = userModel.Age,
+                Password = userModel.Password,
+                Login = userModel.Login,
+                Photo = userModel.Photo
+            };
+
+            return newUser;
+
+        }
+        
     }
 }

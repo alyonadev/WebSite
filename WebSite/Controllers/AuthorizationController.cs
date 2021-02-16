@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Security;
 using Services;
 using WebSite.Models;
+using System.Linq;
 
 namespace WebSite.Controllers
 {
@@ -16,13 +17,15 @@ namespace WebSite.Controllers
 				Неверный логин или пароль.
 			</div>";
 
-        private readonly IUserService _userService;
+        private IUserService _userService;
 
         public AuthorizationController(IUserService userService)
         {
             _userService = userService;
         }
-                
+
+        public AuthorizationController(){}
+
         [HttpGet]
         public ActionResult Login() 
         {
@@ -38,8 +41,8 @@ namespace WebSite.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = _userService.FirstOrDefault(
-                    u => u.Login == login && u.Password == password);
+                var user = _userService.GetAllService().
+                    FirstOrDefault(u => u.Login == login && u.Password == password);
 
                 if (user != null)
                 {
@@ -73,19 +76,19 @@ namespace WebSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(UserInit newUser)
+        public ActionResult Register(UserModel newUser)
         {
             if (ModelState.IsValid)
             {
-                var usr = _userService.FirstOrDefault(
-                    u => u.Login == newUser.Login && u.Password == newUser.Password);
+                User user = _userService.GetAllService().
+                     FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
 
-                if (usr == null)
+                if (user == null)
                 {                  
                     if (newUser.PhotoFile != null)
-                        newUser.Photo = _userService.GetPhoto(newUser.PhotoFile);
+                        newUser.Photo = _userService.GetPhotoService(newUser.PhotoFile);
                     
-                    _userService.Add(newUser);
+                    _userService.AddService(newUser.ToUser(newUser));
 
                     FormsAuthentication.SetAuthCookie(newUser.UserId.ToString(), true);
 

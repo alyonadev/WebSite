@@ -60,9 +60,9 @@
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
+    <ProjectReference Include="..\Models\DBModels.csproj">
       <Project>{dd727461-bfe8-48de-b8cf-d9fc3a55693f}</Project>
-      <Name>Models</Name>
+      <Name>DBModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

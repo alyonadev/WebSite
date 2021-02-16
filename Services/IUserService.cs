@@ -10,7 +10,13 @@ using WebSite.Repository;
 
 namespace Services
 {
-    public interface IUserService : IRepository<User>, IUserRepository
+    public interface IUserService
     {
+        List<User> GetAllService();
+        User GetByIdService(int id);
+        void AddService(User item);
+        void UpdateService(User item);
+        void DeleteService(int id);
+        byte[] GetPhotoService(HttpPostedFileBase file);
     }
 }

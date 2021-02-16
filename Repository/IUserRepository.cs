@@ -7,8 +7,6 @@ namespace WebSite.Repository
 {
     public interface IUserRepository : IRepository<User>
     {
-        User FirstOrDefault(Expression<Func<User, bool>> predicate);
-        User FirstOrDefault();
-        byte[] GetPhoto(HttpPostedFileBase file);
+
     }
 }
