@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 
-namespace WebSite.Models
+namespace WebSite.DBModels
 {
     public class WebSiteContext: DbContext
     {

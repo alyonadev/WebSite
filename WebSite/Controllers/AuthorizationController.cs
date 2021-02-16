@@ -7,6 +7,8 @@ using System.Web.Security;
 using Services;
 using WebSite.Models;
 using System.Linq;
+using WebSite.Repository;
+using WebSite.DBModels;
 
 namespace WebSite.Controllers
 {
@@ -19,12 +21,10 @@ namespace WebSite.Controllers
 
         private IUserService _userService;
 
-        public AuthorizationController(IUserService userService)
+        public AuthorizationController()
         {
-            _userService = userService;
+            _userService = new UserService();
         }
-
-        public AuthorizationController(){}
 
         [HttpGet]
         public ActionResult Login() 

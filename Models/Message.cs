@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace WebSite.Models
+namespace WebSite.DBModels
 {
     [Table ("Message")]
     public class Message

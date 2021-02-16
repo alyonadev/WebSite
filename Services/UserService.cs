@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using WebSite.Models;
+using WebSite.DBModels;
 using WebSite.Repository;
 
 namespace Services
@@ -14,10 +14,11 @@ namespace Services
     {
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService()
         {
-            _userRepository = userRepository;
+            _userRepository = new UserRepository(new WebSiteContext());
         }
+
         public void AddService(User item)
         {
             _userRepository.Add(item);
