@@ -80,7 +80,7 @@ namespace WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = _userService.GetAllService().
+                var user = _userService.GetAllService().
                      FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
 
                 if (user == null)
@@ -90,7 +90,10 @@ namespace WebSite.Controllers
                     
                     _userService.AddService(newUser.ToUser(newUser));
 
-                    FormsAuthentication.SetAuthCookie(newUser.UserId.ToString(), true);
+                    var userLogin = _userService.GetAllService().
+                        FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
+
+                    FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
 
                     return RedirectToAction("Index", "User");
                 }
