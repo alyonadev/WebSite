@@ -9,14 +9,14 @@ namespace WebSite.Controllers
 {
     public class MessageController : Controller
     {
-        private IMessageService _messageService;
-        private IUserService _userService;
+        private readonly IMessageService _messageService;
+        private readonly IUserService _userService;
 
 
-        public MessageController(IMessageService messageService, IUserService userService)
+        public MessageController()
         {
-            _messageService = messageService;
-            _userService = userService;
+            _messageService = new MessageService();
+            _userService = new UserService();
         }
 
         [Authorize]
@@ -27,11 +27,9 @@ namespace WebSite.Controllers
             foreach (var user in users)
             {
                 if (user.Photo != null)
-                {
-                    string userPhotoBase64Data = Convert.ToBase64String(user.Photo);
-                    string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
-                    ViewBag.UserImage = imgDataURL;
-                }
+                    ViewBag.UserImage = _userService.GetURLPhotoService(user.Photo);
+                else
+                    ViewBag.UserImage = null;
             }
 
             return View(users);

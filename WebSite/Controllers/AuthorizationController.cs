@@ -19,7 +19,7 @@ namespace WebSite.Controllers
 				Неверный логин или пароль.
 			</div>";
 
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public AuthorizationController()
         {
@@ -86,7 +86,7 @@ namespace WebSite.Controllers
                 if (user == null)
                 {                  
                     if (newUser.PhotoFile != null)
-                        newUser.Photo = _userService.GetPhotoService(newUser.PhotoFile);
+                        newUser.Photo = _userService.GetBytePhotoService(newUser.PhotoFile);
                     
                     _userService.AddService(newUser.ToUser(newUser));
 

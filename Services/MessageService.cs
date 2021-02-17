@@ -11,39 +11,41 @@ namespace Services
     public class MessageService : IMessageService
     {
         private readonly IMessageRepository _messageRepository;
-        public MessageService(IMessageRepository messageRepository)
+        public MessageService()
         {
-            _messageRepository = messageRepository;
+            _messageRepository = new MessageRepository(new WebSiteContext());
         }
 
-        public void Add(Message item)
+        public void AddService(Message item)
         {
             _messageRepository.Add(item);
         }
 
-        public void Delete(int id)
+        public void DeleteService(int id)
         {
             _messageRepository.Delete(id);
         }
 
-        public void Dispose()
+        public void DisposeService()
         {
             _messageRepository.Dispose();
         }
 
-        public IEnumerable<Message> GetAll()
+        public List<Message> GetAllService()
         {
-            return _messageRepository.GetAll();
+            IEnumerable<Message> messageList = _messageRepository.GetAll();
+            return messageList.ToList();
         }
 
-        public Message GetById(int id)
+        public Message GetByIdService(int id)
         {
             return _messageRepository.GetById(id);
         }
 
-        public void Update(Message item)
+        public void UpdateService(Message item)
         {
             _messageRepository.Update(item);
         }
+        
     }
 }

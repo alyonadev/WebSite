@@ -50,7 +50,7 @@ namespace Services
             _userRepository.Update(item);
         }
 
-        public byte[] GetPhotoService(HttpPostedFileBase photoFile)
+        public byte[] GetBytePhotoService(HttpPostedFileBase photoFile)
         {
             byte[] photoData = new byte[photoFile.ContentLength];
             photoFile.InputStream.Read(photoData, 0, photoFile.ContentLength);
@@ -58,6 +58,11 @@ namespace Services
             return photoData;
         }
 
-
+        public string GetURLPhotoService(byte[] photo)
+        {
+            string userPhotoBase64Data = Convert.ToBase64String(photo);
+            string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
+            return imgDataURL;
+        }
     }
 }

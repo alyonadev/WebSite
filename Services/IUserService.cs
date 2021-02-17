@@ -17,6 +17,7 @@ namespace Services
         void AddService(User item);
         void UpdateService(User item);
         void DeleteService(int id);
-        byte[] GetPhotoService(HttpPostedFileBase file);
+        byte[] GetBytePhotoService(HttpPostedFileBase file);
+        string GetURLPhotoService(byte[] photo);
     }
 }

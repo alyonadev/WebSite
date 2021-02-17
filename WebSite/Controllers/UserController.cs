@@ -16,11 +16,11 @@ namespace WebSite.Controllers
 {
     public class UserController : Controller
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
                 
-        public UserController(IUserService userService)
+        public UserController()
         {
-            _userService = userService;
+            _userService = new UserService();
         }
 
         [Authorize]
@@ -31,11 +31,7 @@ namespace WebSite.Controllers
                 var user = _userService.GetByIdService(userId);
 
                 if (user.Photo != null)
-                {
-                    string userPhotoBase64Data = Convert.ToBase64String(user.Photo);
-                    string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
-                    ViewBag.UserImage = imgDataURL;
-                }
+                    ViewBag.UserImage = _userService.GetURLPhotoService(user.Photo);
 
                 return View(user);
             }
@@ -46,7 +42,9 @@ namespace WebSite.Controllers
         public ActionResult Edit()
         {
             if (int.TryParse(User.Identity.Name, out int userId))
+            {
                 return View(_userService.GetByIdService(userId));
+            }
             else
                 return RedirectToAction("Index", "User");
         }
@@ -55,7 +53,9 @@ namespace WebSite.Controllers
         public ActionResult Edit(UserModel updatedUser)
         {
             if (updatedUser.PhotoFile != null)
-                updatedUser.Photo = _userService.GetPhotoService(updatedUser.PhotoFile);
+                updatedUser.Photo = _userService.GetBytePhotoService(updatedUser.PhotoFile);
+            else
+                updatedUser.Photo = null;
 
             _userService.UpdateService(updatedUser.ToUser(updatedUser));
 
