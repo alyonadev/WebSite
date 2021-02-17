@@ -31,6 +31,7 @@ namespace WebSite.Models
         {
             User newUser = new User
             {
+                UserId = userModel.UserId,
                 Name = userModel.Name,
                 Surname = userModel.Surname,
                 Address = userModel.Address,
@@ -44,6 +45,22 @@ namespace WebSite.Models
 
         }
 
+        public UserModel ToUserModel(User user)
+        {
+            UserModel newUser = new UserModel
+            {
+                UserId = user.UserId,
+                Name = user.Name,
+                Surname = user.Surname,
+                Address = user.Address,
+                Age = user.Age,
+                Password = user.Password,
+                Login = user.Login,
+                Photo = user.Photo
+            };
+
+            return newUser;
+        }
 
     }
 }

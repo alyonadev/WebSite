@@ -43,7 +43,12 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                return View(_userService.GetByIdService(userId));
+                var user = _userService.GetByIdService(userId);
+
+                UserModel model = new UserModel();
+                UserModel userModel = model.ToUserModel(user);
+
+                return View(userModel);
             }
             else
                 return RedirectToAction("Index", "User");
@@ -54,8 +59,6 @@ namespace WebSite.Controllers
         {
             if (updatedUser.PhotoFile != null)
                 updatedUser.Photo = _userService.GetBytePhotoService(updatedUser.PhotoFile);
-            else
-                updatedUser.Photo = null;
 
             _userService.UpdateService(updatedUser.ToUser(updatedUser));
 
