@@ -231,10 +231,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Startup\Startup.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">

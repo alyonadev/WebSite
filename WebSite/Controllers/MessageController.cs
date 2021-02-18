@@ -38,9 +38,14 @@ namespace WebSite.Controllers
         [HttpGet]
         public ActionResult Chat()
         {
-            
+            if (int.TryParse(User.Identity.Name, out int userId))
+            {
+                var user = _userService.GetByIdService(userId);
 
-            return View();
+                return View(user);
+            }
+            else
+                return View("Login", "Authorization");
         }
 
     }
