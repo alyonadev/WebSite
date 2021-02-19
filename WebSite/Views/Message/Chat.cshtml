@@ -10,8 +10,8 @@
     </div>
     <button type="submit" class="btn btn-success" id="sendmessage" >Отправить</button>
     <div class="container">
-        <input type="hidden" id="displayname" value="@Model.Name"/>
-        <ul id="discussion"></ul>
+        <input type="hidden" id="displayname" value="@Model.Name" />
+        <ul id="chat"></ul>
     </div>
 </form>
 
@@ -23,8 +23,8 @@
         $(function () {
             var chat = $.connection.chatHub;
 
-            chat.client.addNewMessage = function (name, message) {
-                $('#discussion').append('<li><b>' + name + '</b>:' + message + '</li>');
+            chat.client.addMessage = function (name, message) {
+                $('#chat').append('<li><b>' + name + '</b>:' + message + '</li>');
             };
 
             $.connection.hub.start().done(function () {

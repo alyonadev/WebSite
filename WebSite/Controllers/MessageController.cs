@@ -20,6 +20,7 @@ namespace WebSite.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public ActionResult Index()
         {
             var users = _userService.GetAllService();
@@ -29,7 +30,8 @@ namespace WebSite.Controllers
             return View(users);
         }
 
-        
+
+        [HttpGet]
         public ActionResult Chat()
         {
             if (int.TryParse(User.Identity.Name, out int userId))

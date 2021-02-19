@@ -11,7 +11,8 @@ namespace WebSite.Hubs
     {
         public void Send(string name, string message)
         {
-            Clients.All.addNewMessage(name, message);
+
+            Clients.All.addMessage(name, message);
         }
 
     }

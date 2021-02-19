@@ -5,12 +5,12 @@ namespace WebSite.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WebSite.DBModels.WebSiteContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DBModels.WebSiteContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WebSite.Models.WebSiteContext";
+            ContextKey = "WebSite.DBModels.WebSiteContext";
         }
 
         protected override void Seed(WebSite.DBModels.WebSiteContext context)
