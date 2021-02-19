@@ -17,18 +17,12 @@
     {
         <tr>
             <td width="100">
-                @if (@ViewBag.UserImage == null)
-                {
-                    <img src="~/img/defaultPhoto.jpg" style="height: 100px; width: 100px;" />
-                }
-                else
-                {
-                    <img src="@ViewBag.UserImage" style="height: 100px; width: 100px;" />
-                }
+                @* Show photo *@
+                <img src="~/img/defaultPhoto.jpg" style="height: 100px; width: 100px;" />
                 
                 @user.Surname @user.Name
             </td>
-            <td>some text...</td>
+            <td>Write this user...</td>
             <td align="right">
                 <button type="submit" class="btn btn-success" onclick="window.open('@Url.Action("Chat", "Message")')">Открыть чат</button>
             </td>

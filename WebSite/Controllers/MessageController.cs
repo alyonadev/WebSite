@@ -24,18 +24,12 @@ namespace WebSite.Controllers
         {
             var users = _userService.GetAllService();
 
-            foreach (var user in users)
-            {
-                if (user.Photo != null)
-                    ViewBag.UserImage = _userService.GetURLPhotoService(user.Photo);
-                else
-                    ViewBag.UserImage = null;
-            }
+            //get user photo
 
             return View(users);
         }
 
-        [HttpGet]
+        
         public ActionResult Chat()
         {
             if (int.TryParse(User.Identity.Name, out int userId))
@@ -46,6 +40,7 @@ namespace WebSite.Controllers
             }
             else
                 return View("Login", "Authorization");
+            
         }
 
     }

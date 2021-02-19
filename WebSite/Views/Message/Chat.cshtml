@@ -10,7 +10,7 @@
     </div>
     <button type="submit" class="btn btn-success" id="sendmessage" >Отправить</button>
     <div class="container">
-        <input type="hidden" id="displayname" />
+        <input type="hidden" id="displayname" value="@Model.Name"/>
         <ul id="discussion"></ul>
     </div>
 </form>
@@ -24,11 +24,8 @@
             var chat = $.connection.chatHub;
 
             chat.client.addNewMessage = function (name, message) {
-                $('#discussion').append('<li><strong>' + htmlEncode(name) + '</strong>:' + htmlEncode(message) + '</li>');
+                $('#discussion').append('<li><b>' + name + '</b>:' + message + '</li>');
             };
-
-            $('#displayname').val(prompt('name: ', ''));
-            $('#message').focus();
 
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
@@ -37,11 +34,7 @@
                 });
             });
         });
-
-        function htmlEncode(value) {
-            var encodedValue = $('<div/>').text(value).html();
-            return encodedValue;
-        }
+        
     </script>
 
 }
