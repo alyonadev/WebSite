@@ -32,7 +32,7 @@ namespace WebSite.Controllers
 
 
         [HttpGet]
-        public ActionResult Chat()
+        public ActionResult Chat(int id)
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {

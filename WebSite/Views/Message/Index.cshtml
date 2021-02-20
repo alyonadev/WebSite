@@ -19,12 +19,11 @@
             <td width="100">
                 @* Show photo *@
                 <img src="~/img/defaultPhoto.jpg" style="height: 100px; width: 100px;" />
-
                 @user.Surname @user.Name
             </td>
             <td>Write this user...</td>
             <td align="right">
-                <button type="submit" class="btn btn-success" onclick="window.open('@Url.Action("Chat", "Message")')">Открыть чат</button>
+                <button type="submit" class="btn btn-success" onclick="window.open('@Url.Action("Chat", "Message", new { id = user.UserId })')">Открыть чат</button>
             </td>
         </tr>
     }
