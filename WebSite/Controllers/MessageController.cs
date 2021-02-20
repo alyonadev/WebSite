@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebSite.Models;
 
 namespace WebSite.Controllers
 {
@@ -23,10 +24,7 @@ namespace WebSite.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var users = _userService.GetAllService();
-
-            //get user photo
-
+            var users = UserModel.ToUserModelList(_userService.GetAllService());
             return View(users);
         }
 

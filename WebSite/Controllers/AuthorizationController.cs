@@ -86,9 +86,9 @@ namespace WebSite.Controllers
                 if (user == null)
                 {                  
                     if (newUser.PhotoFile != null)
-                        newUser.Photo = _userService.GetBytePhotoService(newUser.PhotoFile);
+                        newUser.Photo = UserModel.GetBytePhotoService(newUser.PhotoFile);
                     
-                    _userService.AddService(newUser.ToUser(newUser));
+                    _userService.AddService(UserModel.ToUser(newUser));
 
                     var userLogin = _userService.GetAllService().
                         FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);

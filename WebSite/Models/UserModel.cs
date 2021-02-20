@@ -21,13 +21,15 @@ namespace WebSite.Models
 
         public HttpPostedFileBase PhotoFile { get; set; }
 
+        public string PhotoUrl { get; set; }
+
         public int Age { get; set; }
 
         public string Address { get; set; }
 
         public string Login { get; set; }
 
-        public User ToUser(UserModel userModel) 
+        public static User ToUser(UserModel userModel) 
         {
             User newUser = new User
             {
@@ -45,7 +47,7 @@ namespace WebSite.Models
 
         }
 
-        public UserModel ToUserModel(User user)
+        public static UserModel ToUserModel(User user)
         {
             UserModel newUser = new UserModel
             {
@@ -56,10 +58,40 @@ namespace WebSite.Models
                 Age = user.Age,
                 Password = user.Password,
                 Login = user.Login,
-                Photo = user.Photo
+                Photo = user.Photo,
+                PhotoUrl = GetURLPhotoService(user.Photo)
             };
 
             return newUser;
+        }
+
+        public static IEnumerable<User> ToUserList(IEnumerable<UserModel> userModels)
+        {
+            List<User> users = new List<User>();
+            foreach (var um in userModels) users.Add(ToUser(um));
+            return users.AsEnumerable();
+        }
+
+        public static IEnumerable<UserModel> ToUserModelList(IEnumerable<User> users)
+        {
+            List<UserModel> userModels = new List<UserModel>();
+            foreach (var um in users) userModels.Add(ToUserModel(um));
+            return userModels.AsEnumerable();
+        }
+
+        public static byte[] GetBytePhotoService(HttpPostedFileBase photoFile)
+        {
+            byte[] photoData = new byte[photoFile.ContentLength];
+            photoFile.InputStream.Read(photoData, 0, photoFile.ContentLength);
+
+            return photoData;
+        }
+
+        public static string GetURLPhotoService(byte[] photo)
+        {
+            string userPhotoBase64Data = Convert.ToBase64String(photo);
+            string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
+            return imgDataURL;
         }
 
     }

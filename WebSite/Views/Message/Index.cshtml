@@ -18,8 +18,17 @@
         <tr>
             <td width="100">
                 @* Show photo *@
-                <img src="~/img/defaultPhoto.jpg" style="height: 100px; width: 100px;" />
-                @user.Surname @user.Name
+                @if (user.Photo == null)
+                {
+                    <img src="~/img/defaultPhoto.jpg" style="height: 100px; width: 100px;" />
+                }
+                else
+                {
+                    <img src="@user.PhotoUrl" style="height: 100px; width: 100px;" />
+                }
+                <p>
+                    @user.Surname @user.Name
+                </p>
             </td>
             <td>Write this user...</td>
             <td align="right">
