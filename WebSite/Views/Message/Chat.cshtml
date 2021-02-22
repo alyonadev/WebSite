@@ -3,6 +3,8 @@
     ViewBag.Title = "Chat";
 }
 
+
+
 <form>
     <div class="form-group">
         <label for="message" style="font-size: 18pt;">Сообщение</label>
@@ -11,9 +13,12 @@
     <button type="button" class="btn btn-success" id="sendmessage" >Отправить</button>
     <div class="container">
         <input type="hidden" id="displayname" value="@Model.Name" />
+        <input type="hidden" id="toUserId" value="@ViewBag.UserIdTo" />
         <ul id="chat"></ul>
     </div>
 </form>
+
+
 
 @section scripts{
     <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
@@ -23,13 +28,14 @@
         $(function () {
             var chat = $.connection.chatHub;
 
-            chat.client.addMessage = function (name, message) {
-                $('#chat').append('<li><b>' + name + '</b>:' + message + '</li>');
-            };
+            chat.client.sendMessageAsync = function (from, message) {
+                
+                $('#chat').append('<li><b>' + from + '</b>:' + message + '</li>');
+            };        
 
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
-                    chat.server.send($('#displayname').val(), $('#message').val());
+                    chat.server.send($('#displayname').val(), $('#toUserId').val(), $('#message').val());
                     $('#message').val('').focus();
                 });
             });

@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Owin;
 using Owin;
 using System;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace WebSite.App_Start
 {
     public class Startup
     {
+
+
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR();

@@ -28,14 +28,14 @@ namespace WebSite.Controllers
             return View(users);
         }
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult Chat(int id)
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
                 var user = _userService.GetByIdService(userId);
-
+                ViewBag.UserIdTo = id;
                 return View(user);
             }
             else
