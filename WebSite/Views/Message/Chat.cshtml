@@ -1,21 +1,29 @@
-﻿
+﻿WebSite.Models.MessageModel
+
 @{
     ViewBag.Title = "Chat";
 }
 
 
 
-<form>
+<form method="post">
     <div class="form-group">
         <label for="message" style="font-size: 18pt;">Сообщение</label>
-        <textarea id="message" class="form-control" rows="3" placeholder="Сообщение..."></textarea>
+        <input type="text" name="text" id="message" class="form-control" placeholder="Сообщение..." required />
     </div>
-    <button type="button" class="btn btn-success" id="sendmessage" >Отправить</button>
+    <button type="submit" class="btn btn-success" id="sendmessage" >Отправить</button>
     <div class="container">
-        <input type="hidden" id="displayname" value="@Model.Name" />
-        <input type="hidden" id="toUserId" value="@ViewBag.UserIdTo" />
-        <ul id="chat"></ul>
+        <input type="hidden" id="displayname" name="UserNameFrom" value="@ViewBag.UserNameFrom" />
+        <input type="hidden" id="toUserId" name="to" value="@ViewBag.UserIdTo" />
     </div>
+    <div class="form-group">
+        <ul id="chat">
+            @foreach (var mes in Model)
+            {
+                <li><b>@mes.UserNameFrom</b>: @mes.Text</li>
+            }
+        </ul>
+    </div>    
 </form>
 
 
@@ -36,7 +44,7 @@
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
                     chat.server.send($('#displayname').val(), $('#toUserId').val(), $('#message').val());
-                    $('#message').val('').focus();
+                    //$('#message').val('').focus();
                 });
             });
         });

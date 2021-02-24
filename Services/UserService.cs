@@ -64,5 +64,6 @@ namespace Services
             string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
             return imgDataURL;
         }
+
     }
 }
