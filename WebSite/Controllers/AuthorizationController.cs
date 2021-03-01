@@ -47,7 +47,7 @@ namespace WebSite.Controllers
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.UserId.ToString(), true);
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "Message");
                 }
                 else
                 {

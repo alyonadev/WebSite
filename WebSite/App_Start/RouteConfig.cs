@@ -16,7 +16,7 @@ namespace WebSite
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}",
-                defaults: new { controller = "Authorization", action = "Login"}
+                defaults: new { controller = "Message", action = "Index"}
             );
         }
     }

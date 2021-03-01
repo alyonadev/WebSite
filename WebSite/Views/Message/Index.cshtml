@@ -2,41 +2,36 @@
     ViewBag.Title = "Сообщения";
 }
 
-<h2>Сообщения</h2>
-<form class="form-inline">
-    <div class="form-group mx-sm-3 mb-2">
-        <input class="form-control" type="text" placeholder="Фамилия Имя">
-        <button type="submit" class="btn btn-primary">Поиск</button>
-    </div>
-</form>
+<h1>Сообщения</h1>
 
-<h2>Пользователи</h2>
-
-<table class="table">
+<div>
     @foreach (var user in Model)
     {
-        <tr>
-            <td width="100">
-                @* Show photo *@
-                @if (user.Photo == null)
-                {
-                    <img src="~/img/defaultPhoto.jpg" style="height: 100px; width: 100px;" />
-                }
-                else
-                {
-                    <img src="@user.PhotoUrl" style="height: 100px; width: 100px;" />
-                }
-                <p>
-                    @user.Surname @user.Name
-                </p>
-            </td>
-            <td>Write this user...</td>
-            <td align="right">
-                <button type="submit" class="btn btn-success" onclick="window.open('@Url.Action("Chat", "Message", new { id = user.UserId })')">Открыть чат</button>
-            </td>
-        </tr>
+        <a href="@Url.Action("Chat", "Message", new { id = user.UserId })" class="msg-usr">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        @if (user.Photo == null)
+                        {
+                            <img src="~/img/defaultPhoto.jpg" class="msg-usr-img" />
+                        }
+                        else
+                        {
+                            <img src="@user.PhotoUrl" class="msg-usr-img" />
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@user.Surname @user.Name</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
     }
-</table>
+</div>
 
 
 

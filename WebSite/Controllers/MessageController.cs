@@ -13,7 +13,6 @@ namespace WebSite.Controllers
         private readonly IMessageService _messageService;
         private readonly IUserService _userService;
 
-
         public MessageController()
         {
             _messageService = new MessageService();
@@ -25,6 +24,10 @@ namespace WebSite.Controllers
         public ActionResult Index()
         {
             var users = UserModel.ToUserModelList(_userService.GetAllService());
+            if (int.TryParse(User.Identity.Name, out int uid))
+            {
+                users = users.Where(v => v.UserId != uid).AsEnumerable();
+            }
             return View(users);
         }
 

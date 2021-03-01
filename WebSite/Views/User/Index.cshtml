@@ -3,34 +3,32 @@
     ViewBag.Title = "Профиль";
 }
 
-<br/>
-<table width="100%" cellspacing="0" cellpadding="0">
-    <tr>
-        <td width="350">
+<h1>Профиль</h1>
+
+
+<div class="card mb-3" style="max-width: 740px;">
+    <div class="row g-0">
+        <div class="col-md-4">
             @if (@Model.PhotoUrl == null)
             {
-            <img src="~/img/defaultPhoto.jpg" style="height: 350px; width: 350px;" />
+                <img src="~/img/defaultPhoto.jpg" class="msg-usr-img" />
             }
             else
             {
-                <img src="@Model.PhotoUrl" style="height: 350px; width: 350px;" />
+                <img src="@Model.PhotoUrl" class="msg-usr-img" />
             }
-        </td>
-        <td style="vertical-align: top; padding-left: 10px;">
-            <p style="font-size:  26pt;"><b>@Model.Surname @Model.Name</b></p>
-            <p style="font-size:  14pt;">Возраст: @Model.Age</p>
-            <p style="font-size:  14pt;">Адрес: @Model.Address</p>
-        </td>
-    </tr>
-</table>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"><b>@Model.Surname @Model.Name</b></h5>
+                <p style="font-size:  14pt;">Возраст: @Model.Age</p>
+                <p style="font-size:  14pt;">Адрес: @Model.Address</p>
+                <div>
+                    <button type="submit" class="btn btn-primary" onclick="window.open('@Url.Action("Edit", "User")')">Редактировать</button>
+                    <button type="submit" class="btn btn-danger" onclick="window.open('@Url.Action("Delete", "User")')">Удалить</button>
+                </div>
 
-<br />
-
-<div>
-    <button type="submit" class="btn btn-primary" onclick="window.open('@Url.Action("Edit", "User")')">Редактировать</button>
-    <button type="submit" class="btn btn-danger" onclick="window.open('@Url.Action("Delete", "User")')">Удалить</button>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-

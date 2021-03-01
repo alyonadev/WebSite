@@ -11,7 +11,7 @@ namespace WebSite.DBModels
     public class Message
     {
         [Key]
-        public int MessageId { get; set; }
+        public int? MessageId { get; set; }
 
         public int From { get; set; }
 
