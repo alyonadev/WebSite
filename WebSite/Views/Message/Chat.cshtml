@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Chat";
+
 }
 
 
@@ -7,9 +8,9 @@
 <form method="post">
     <div class="form-group">
         <label for="message" style="font-size: 18pt;">Сообщение</label>
-        <textarea type="text" id="message" class="form-control" placeholder="Сообщение..." required ></textarea>
+        <textarea type="text" id="message" class="form-control" placeholder="Сообщение..." ></textarea>
     </div>
-    <button type="submit" class="btn btn-success" id="sendmessage" >Отправить</button>
+    <button type="button" class="btn btn-success" id="sendmessage" >Отправить</button>
     <div class="container">
         <input type="hidden" id="displayname" value="@Model.Name" />
         <input type="hidden" id="toUserId" value="@ViewBag.UserIdTo" />
@@ -31,7 +32,7 @@
 
             chat.client.sendMessageAsync = function (from, message) {
                 
-                $('#chat').append('<li><b>' + from + '</b>:' + message + '</li>');
+                $('#chat').append('<li><b>' + from + '</b>: ' + message + '</li>');
             };        
 
             $.connection.hub.start().done(function () {

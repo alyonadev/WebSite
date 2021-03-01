@@ -34,7 +34,7 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                var user = _userService.GetByIdService(userId);
+                var user = UserModel.ToUserModel(_userService.GetByIdService(userId));
 
                 ViewBag.UserIdTo = id;
 
