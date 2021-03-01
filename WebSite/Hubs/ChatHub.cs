@@ -25,6 +25,11 @@ namespace WebSite.Hubs
             }
         }
 
+        public void SaveMessage()
+        {
+
+        }
+
         public override Task OnConnected()
         {
             string name = Context.User.Identity.Name;

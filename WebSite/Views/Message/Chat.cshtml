@@ -1,6 +1,4 @@
-﻿WebSite.Models.MessageModel
-
-@{
+﻿@{
     ViewBag.Title = "Chat";
 }
 
@@ -9,20 +7,15 @@
 <form method="post">
     <div class="form-group">
         <label for="message" style="font-size: 18pt;">Сообщение</label>
-        <input type="text" name="text" id="message" class="form-control" placeholder="Сообщение..." required />
+        <textarea type="text" id="message" class="form-control" placeholder="Сообщение..." required ></textarea>
     </div>
     <button type="submit" class="btn btn-success" id="sendmessage" >Отправить</button>
     <div class="container">
-        <input type="hidden" id="displayname" name="UserNameFrom" value="@ViewBag.UserNameFrom" />
-        <input type="hidden" id="toUserId" name="to" value="@ViewBag.UserIdTo" />
+        <input type="hidden" id="displayname" value="@Model.Name" />
+        <input type="hidden" id="toUserId" value="@ViewBag.UserIdTo" />
     </div>
     <div class="form-group">
-        <ul id="chat">
-            @foreach (var mes in Model)
-            {
-                <li><b>@mes.UserNameFrom</b>: @mes.Text</li>
-            }
-        </ul>
+        <ul id="chat"></ul>
     </div>    
 </form>
 
@@ -44,7 +37,7 @@
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
                     chat.server.send($('#displayname').val(), $('#toUserId').val(), $('#message').val());
-                    //$('#message').val('').focus();
+                    $('#message').val('').focus();
                 });
             });
         });

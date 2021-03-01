@@ -36,29 +36,12 @@ namespace WebSite.Controllers
             {
                 var user = _userService.GetByIdService(userId);
 
-                ViewBag.UserNameFrom = user.Name;
                 ViewBag.UserIdTo = id;
 
-                var messages = MessageModel.ToMessageModelList(_messageService.GetAllService());
-                              
-                if (messages != null)
-                    return View(messages);
-                else
-                    return View();
+                return View(user);
             }
             else
                 return View("Login", "Authorization");            
-        }
-
-        [HttpPost]
-        public ActionResult Chat(MessageModel messageModel)
-        {
-            messageModel.From = Convert.ToInt32(User.Identity.Name);
-            messageModel.Date = DateTime.Now;
-
-            _messageService.AddService(MessageModel.ToMessage(messageModel));
-
-            return View();
         }
 
     }
