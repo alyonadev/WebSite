@@ -31,9 +31,11 @@ namespace Services
             _messageRepository.Dispose();
         }
 
-        public List<Message> GetAllService()
+        public List<Message> GetAllClientsService(int fromId, int toId)
         {
-            IEnumerable<Message> messageList = _messageRepository.GetAll();
+            IEnumerable<Message> messageList = _messageRepository.GetAll().Where(v => 
+            (v.From == fromId && v.To == toId) || 
+            (v.From == toId && v.To == fromId));
             return messageList.ToList();
         }
 
