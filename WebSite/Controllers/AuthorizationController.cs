@@ -71,33 +71,42 @@ namespace WebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(UserModel newUser)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = _userService.GetAllService().
-                     FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
+                if (ModelState.IsValid)
+                {
+                    var user = _userService.GetAllService().
+                         FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
 
-                if (user == null)
-                {                  
-                    if (newUser.PhotoFile != null)
-                        newUser.Photo = UserModel.GetBytePhotoService(newUser.PhotoFile);
-                    
-                    _userService.AddService(UserModel.ToUser(newUser));
+                    if (user == null)
+                    {
+                        if (newUser.PhotoFile != null)
+                            newUser.Photo = UserModel.GetBytePhotoService(newUser.PhotoFile);
 
-                    var userLogin = _userService.GetAllService().
-                        FirstOrDefault(u => u.Login == newUser.Login && u.Password == _userService.GetHashService(newUser.Password));
+                        _userService.AddService(UserModel.ToUser(newUser));
 
-                    FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
+                        var userLogin = _userService.GetAllService().
+                            FirstOrDefault(u => u.Login == newUser.Login && u.Password == _userService.GetHashService(newUser.Password));
 
-                    return RedirectToAction("Index", "User");
+                        FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
+
+                        return RedirectToAction("Index", "User");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Пользователь с таким логином и паролем уже существует!";
+                        return View();
+                    }
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = "Пользователь с таким логином и паролем уже существует!";
                     return View();
                 }
             }
-            else
+            catch (System.Exception)
             {
+
+                ViewBag.ErrorMessage = "Недопустимый возраст!";
                 return View();
             }
         }

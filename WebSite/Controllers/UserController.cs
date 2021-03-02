@@ -43,12 +43,20 @@ namespace WebSite.Controllers
         [HttpPost]
         public ActionResult Edit(UserModel updatedUser)
         {
-            if (updatedUser.PhotoFile != null)
-                updatedUser.Photo = UserModel.GetBytePhotoService(updatedUser.PhotoFile);
+            try
+            {
+                if (updatedUser.PhotoFile != null)
+                    updatedUser.Photo = UserModel.GetBytePhotoService(updatedUser.PhotoFile);
 
-            _userService.UpdateService(UserModel.ToUser(updatedUser));
+                _userService.UpdateService(UserModel.ToUser(updatedUser));
 
-            return View(updatedUser);
+                return View(updatedUser);
+            }
+            catch (System.Exception)
+            {
+                ViewBag.ErrorMessage = "Недопустимый возраст!";
+                return View(updatedUser);
+            }
         }
 
         public ActionResult Delete()

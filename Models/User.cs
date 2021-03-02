@@ -21,18 +21,18 @@ namespace WebSite.DBModels
         [MaxLength(30)]
         public string Surname { get; set; }
 
-        [Required(ErrorMessage = "Неправильный пароль")]
+        [Required]
         public string Password { get; set; }
         
         public byte[] Photo { get; set; }
 
-        [Range(6, 80, ErrorMessage ="Значение возраста не верно")]
+        [Range(6, 80)]
         public int Age { get; set; }
 
         [MaxLength(40)]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Неправильный логин")]
+        [Required]
         public string Login { get; set; }
 
     }

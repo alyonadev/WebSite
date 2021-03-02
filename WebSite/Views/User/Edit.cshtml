@@ -7,6 +7,9 @@
 
 @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
     <div class="form-group">
         <input type="hidden" value="@Model.UserId" name="UserId" />
 
@@ -29,8 +32,10 @@
         <input type="text" class="form-control" id="inputLogin" name="login" value="@Model.Login" required />
 
         <label for="inputPhotoFile">Фотография</label>
-        <input type="file" class="form-control-file" id="inputPhotoFile"  name="photofile">
+        <input type="file" class="form-control-file" id="inputPhotoFile" name="photofile">
     </div>
+
+    <label style="color: red">@ViewBag.ErrorMessage</label><br />
 
     <button type="submit" class="btn btn-success">Обновить</button>
 }
