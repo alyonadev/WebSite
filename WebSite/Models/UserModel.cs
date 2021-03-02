@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using WebSite.DBModels;
 
@@ -38,7 +39,7 @@ namespace WebSite.Models
                 Surname = userModel.Surname,
                 Address = userModel.Address,
                 Age = userModel.Age,
-                Password = userModel.Password,
+                Password = Hash(userModel.Password),
                 Login = userModel.Login,
                 Photo = userModel.Photo
             };
@@ -56,11 +57,17 @@ namespace WebSite.Models
                 Surname = user.Surname,
                 Address = user.Address,
                 Age = user.Age,
-                Password = user.Password,
+                Password = Hash(user.Password),
                 Login = user.Login,
-                Photo = user.Photo,
-                PhotoUrl = GetURLPhotoService(user.Photo)
+                Photo = null,
+                PhotoUrl = null
             };
+
+            if (user.Photo != null)
+            {
+                newUser.Photo = user.Photo;
+                newUser.PhotoUrl = GetURLPhotoService(user.Photo);
+            }
 
             return newUser;
         }
@@ -92,6 +99,12 @@ namespace WebSite.Models
             string userPhotoBase64Data = Convert.ToBase64String(photo);
             string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
             return imgDataURL;
+        }
+        public static string Hash(string value)
+        {
+            return Convert.ToBase64String(
+                System.Security.Cryptography.SHA256.Create()
+                .ComputeHash(Encoding.UTF8.GetBytes(value)));
         }
 
     }

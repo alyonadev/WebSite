@@ -19,5 +19,6 @@ namespace Services
         void DeleteService(int id);
         byte[] GetBytePhotoService(HttpPostedFileBase file);
         string GetURLPhotoService(byte[] photo);
+        string GetHashService(string value);
     }
 }

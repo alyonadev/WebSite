@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using System.Web;
 using WebSite.DBModels;
 
@@ -62,6 +63,5 @@ namespace WebSite.Repository
 
             GC.SuppressFinalize(this);
         }
-
     }
 }

@@ -27,6 +27,7 @@ namespace WebSite.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Edit()
         {
@@ -50,7 +51,6 @@ namespace WebSite.Controllers
             return View(updatedUser);
         }
 
-        
         public ActionResult Delete()
         {
             if (int.TryParse(User.Identity.Name, out int userId))

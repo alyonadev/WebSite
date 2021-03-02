@@ -8,10 +8,9 @@
 
 @using (Html.BeginForm("Register", "Authorization", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
-
     <div>
         @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
 
         <div class="form-group">
             <br />
@@ -36,6 +35,8 @@
             <label for="inputPhotoFile">Фотография</label>
             <input type="file" class="form-control-file" id="inputPhotoFile" name="photofile" />
         </div>
+
+        <label style="color: red">@ViewBag.ErrorMessage</label><br />
 
         <button type="submit" class="btn btn-success">Подтвердить</button>
     </div>

@@ -10,7 +10,6 @@ using WebSite.Models;
 
 namespace WebSite.Hubs
 {
-    [Authorize]
     public class ChatHub : Hub
     {
         private readonly static ConnectionMapping<string> _connections =
@@ -42,10 +41,6 @@ namespace WebSite.Hubs
             }
             await Clients.Client(Context.ConnectionId).sendMessageAsync(from, message);
 
-            if (cids.Count() == 0) 
-            {
-                await Clients.Client(Context.ConnectionId).sendMessageAsync(from, message);
-            }
         }
 
         public override Task OnConnected()

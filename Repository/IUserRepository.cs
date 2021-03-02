@@ -7,6 +7,5 @@ namespace WebSite.Repository
 {
     public interface IUserRepository : IRepository<User>
     {
-
     }
 }

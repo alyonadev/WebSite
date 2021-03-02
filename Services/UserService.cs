@@ -64,6 +64,11 @@ namespace Services
             string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
             return imgDataURL;
         }
-
+        public string GetHashService(string value)
+        {
+            return Convert.ToBase64String(
+                System.Security.Cryptography.SHA256.Create()
+                .ComputeHash(Encoding.UTF8.GetBytes(value)));
+        }
     }
 }

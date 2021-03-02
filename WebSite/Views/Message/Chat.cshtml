@@ -8,24 +8,27 @@
 <input type="hidden" id="fromUserId" value="@ViewBag.FromUser.UserId" />
 <input type="hidden" id="toUserId" value="@ViewBag.ToUser.UserId" />
 
+<h1>Чат комната</h1>
+
 <div class="form-group">
-    <label for="message">Сообщение</label>
+    <label for="message" >Сообщение</label><br/>
     <textarea type="text" id="message" class="form-control" placeholder="Сообщение..."></textarea>
-</div>
+</div><br/>
 
 <button type="button" class="btn btn-success" id="sendmessage">Отправить</button>
 
 <div class="form-group">
+    <label for="chat">История сообщений</label><br />
     <ul id="chat">
-        @foreach (var m in Model)
+        @foreach (var message in Model)
         {
-            if (m.From == ViewBag.FromUser.UserId)
+            if (message.From == ViewBag.FromUser.UserId)
             {
-                <li><b>@ViewBag.FromUser.Name</b>: @m.Text</li>
+                <li><b>@ViewBag.FromUser.Name</b>: @message.Text</li>
             }
             else
             {
-                <li><b>@ViewBag.ToUser.Name</b>: @m.Text</li>
+                <li><b>@ViewBag.ToUser.Name</b>: @message.Text</li>
             }
         }
     </ul>

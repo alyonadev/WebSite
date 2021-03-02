@@ -14,11 +14,6 @@ namespace WebSite.Controllers
 {
     public class AuthorizationController : Controller
     {
-        const string ErrorMsgTemplate = @"
-			<div class=""alert alert-danger"" role=""alert"">
-				Неверный логин или пароль.
-			</div>";
-
         private readonly IUserService _userService;
 
         public AuthorizationController()
@@ -37,12 +32,10 @@ namespace WebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string login, string password)
         {
-            ViewData["Message"] = string.Empty;
-
             if (ModelState.IsValid)
             {
                 var user = _userService.GetAllService().
-                    FirstOrDefault(u => u.Login == login && u.Password == password);
+                    FirstOrDefault(u => u.Login == login && u.Password == _userService.GetHashService(password));
 
                 if (user != null)
                 {
@@ -51,7 +44,7 @@ namespace WebSite.Controllers
                 }
                 else
                 {
-                    ViewData["Massage"] = ErrorMsgTemplate;
+                    ViewBag.ErrorMessage = "Неверный логин или пароль!";
                     return View();
                 }
             }
@@ -81,7 +74,7 @@ namespace WebSite.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userService.GetAllService().
-                     FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
+                     FirstOrDefault(u => u.Login == newUser.Login && u.Password == _userService.GetHashService(newUser.Password));
 
                 if (user == null)
                 {                  
@@ -91,7 +84,7 @@ namespace WebSite.Controllers
                     _userService.AddService(UserModel.ToUser(newUser));
 
                     var userLogin = _userService.GetAllService().
-                        FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
+                        FirstOrDefault(u => u.Login == newUser.Login && u.Password == _userService.GetHashService(newUser.Password));
 
                     FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
 
@@ -99,7 +92,7 @@ namespace WebSite.Controllers
                 }
                 else
                 {
-                    ViewData["Massage"] = ErrorMsgTemplate;
+                    ViewBag.ErrorMessage = "Пользователь с таким логином и паролем уе существует!";
                     return View();
                 }
             }

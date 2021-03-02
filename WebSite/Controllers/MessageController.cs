@@ -39,8 +39,8 @@ namespace WebSite.Controllers
             {
                 ViewBag.FromUser = UserModel.ToUserModel(_userService.GetByIdService(userId));
                 ViewBag.ToUser = UserModel.ToUserModel(_userService.GetByIdService(id));
-                var msgs = _messageService.GetAllClientsService(userId, id);
-                return View(msgs);
+                var messages = _messageService.GetAllClientsService(userId, id);
+                return View(messages);
             }
             else
                 return View("Login", "Authorization");
