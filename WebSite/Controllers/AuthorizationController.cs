@@ -35,7 +35,7 @@ namespace WebSite.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userService.GetAllService().
-                    FirstOrDefault(u => u.Login == login && u.Password == _userService.GetHashService(password));
+                    FirstOrDefault(u => u.Login == login && u.Password == password);
 
                 if (user != null)
                 {
@@ -74,7 +74,7 @@ namespace WebSite.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userService.GetAllService().
-                     FirstOrDefault(u => u.Login == newUser.Login && u.Password == _userService.GetHashService(newUser.Password));
+                     FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
 
                 if (user == null)
                 {                  
@@ -92,7 +92,7 @@ namespace WebSite.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = "Пользователь с таким логином и паролем уе существует!";
+                    ViewBag.ErrorMessage = "Пользователь с таким логином и паролем уже существует!";
                     return View();
                 }
             }

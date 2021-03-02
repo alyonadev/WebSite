@@ -39,7 +39,8 @@ namespace WebSite.Models
                 Surname = userModel.Surname,
                 Address = userModel.Address,
                 Age = userModel.Age,
-                Password = Hash(userModel.Password),
+                //Password = Hash(userModel.Password),
+                Password = userModel.Password,
                 Login = userModel.Login,
                 Photo = userModel.Photo
             };
@@ -57,7 +58,8 @@ namespace WebSite.Models
                 Surname = user.Surname,
                 Address = user.Address,
                 Age = user.Age,
-                Password = Hash(user.Password),
+                //Password = Hash(user.Password),
+                Password = user.Password,
                 Login = user.Login,
                 Photo = null,
                 PhotoUrl = null
