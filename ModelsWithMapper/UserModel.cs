@@ -2,35 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using WebSite.DBModels;
 
-namespace WebSite.Models
+namespace ModelsWithMapper
 {
-    
-    public class UserModel
+    public class UserModel : UserBase
     {
-        public int? UserId { get; set; }
-
-        public string Name { get; set; }
-
-        public string Surname { get; set; }
-
-        public string Password { get; set; }
-
         public byte[] Photo { get; set; }
 
         public HttpPostedFileBase PhotoFile { get; set; }
 
         public string PhotoUrl { get; set; }
 
-        public int Age { get; set; }
-
         public string Address { get; set; }
 
-        public string Login { get; set; }
 
-        public static User ToUser(UserModel userModel) 
+        public static User ToUser(UserModel userModel)
         {
             User newUser = new User
             {
@@ -89,8 +78,8 @@ namespace WebSite.Models
             List<UserModel> userModels = new List<UserModel>();
 
             foreach (var um in users)
-            { 
-                userModels.Add(ToUserModel(um)); 
+            {
+                userModels.Add(ToUserModel(um));
             }
 
             return userModels.AsEnumerable();
@@ -111,6 +100,5 @@ namespace WebSite.Models
 
             return imgDataURL;
         }
-
     }
 }

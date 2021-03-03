@@ -235,8 +235,6 @@
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\ConnectionMapping.cs" />
-    <Compile Include="Models\MessageModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -326,6 +324,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="img\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -339,6 +338,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ModelsWithMapper\ModelsWithMapper.csproj">
+      <Project>{eff0d297-9ca8-41b4-a7e7-80faca5aea22}</Project>
+      <Name>ModelsWithMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\DBModels.csproj">
       <Project>{DD727461-BFE8-48DE-B8CF-D9FC3A55693F}</Project>
       <Name>DBModels</Name>

@@ -5,10 +5,9 @@ using System.Web.Mvc;
 using System.Web;
 using System.Web.Security;
 using Services;
-using WebSite.Models;
 using System.Linq;
 using WebSite.Repository;
-using WebSite.DBModels;
+using ModelsWithMapper;
 
 namespace WebSite.Controllers
 {

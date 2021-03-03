@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using WebSite.DBModels;
 
-namespace WebSite.Models
+namespace ModelsWithMapper
 {
     public class MessageModel
     {
-        public int? MessageId { get; set; }
+        public int MessageId { get; set; }
 
         public int From { get; set; }
 
@@ -63,9 +64,9 @@ namespace WebSite.Models
         {
             List<MessageModel> messageModels = new List<MessageModel>();
 
-            foreach (var mm in messages) 
+            foreach (var mm in messages)
             {
-                messageModels.Add(ToMessageModel(mm)); 
+                messageModels.Add(ToMessageModel(mm));
             }
 
             return messageModels.AsEnumerable();

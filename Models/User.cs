@@ -11,7 +11,7 @@ namespace WebSite.DBModels
     public class User
     {
         [Key]
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         [MaxLength(15)]
