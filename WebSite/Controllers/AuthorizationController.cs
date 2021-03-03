@@ -6,8 +6,7 @@ using System.Web;
 using System.Web.Security;
 using Services;
 using System.Linq;
-using WebSite.Repository;
-using ModelsWithMapper;
+using ModelsWithMapper.Models;
 
 namespace WebSite.Controllers
 {
@@ -71,7 +70,7 @@ namespace WebSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(UserModel newUser)
+        public ActionResult Register(UserAddModel newUser)
         {
             try
             {
@@ -82,10 +81,7 @@ namespace WebSite.Controllers
 
                     if (user == null)
                     {
-                        if (newUser.PhotoFile != null)
-                            newUser.Photo = UserModel.GetBytePhotoService(newUser.PhotoFile);
-
-                        _userService.AddUserService(UserModel.ToUser(newUser));
+                        _userService.AddUserService(UserAddModel.ToUser(newUser));
 
                         var userLogin = _userService.GetAllUsersService().
                             FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);

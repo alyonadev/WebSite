@@ -26,6 +26,7 @@ namespace WebSite.DBModels
         
         public byte[] Photo { get; set; }
 
+        [Required]
         [Range(6, 80)]
         public int Age { get; set; }
 

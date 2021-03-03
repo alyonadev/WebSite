@@ -2,7 +2,6 @@
 using Services;
 using System.Web.Mvc;
 using System.Web.Security;
-using WebSite.Models;
 
 namespace WebSite.Controllers
 {
@@ -20,10 +19,10 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId)) 
             {
-                var user = UserModel.ToUserModel(_userService.GetByIdUserService(userId));
+                var user = UserEditModel.ToUserModel(_userService.GetByIdUserService(userId));
 
                 if (user.Photo != null)
-                    user.PhotoUrl = UserModel.GetURLPhotoService(user.Photo);
+                    user.PhotoUrl = UserEditModel.GetURLPhotoService(user.Photo);
 
                 return View(user);
             }
@@ -37,7 +36,7 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                UserModel user = UserModel.ToUserModel(_userService.GetByIdUserService(userId));
+                UserEditModel user = UserEditModel.ToUserModel(_userService.GetByIdUserService(userId));
 
                 return View(user);
             }
@@ -46,14 +45,14 @@ namespace WebSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(UserModel updatedUser)
+        public ActionResult Edit(UserEditModel updatedUser)
         {
             try
             {
                 if (updatedUser.PhotoFile != null)
-                    updatedUser.Photo = UserModel.GetBytePhotoService(updatedUser.PhotoFile);
+                    updatedUser.Photo = UserEditModel.GetBytePhotoService(updatedUser.PhotoFile);
 
-                _userService.UpdateUserService(UserModel.ToUser(updatedUser));
+                _userService.UpdateUserService(UserEditModel.ToUser(updatedUser));
 
                 return View(updatedUser);
             }

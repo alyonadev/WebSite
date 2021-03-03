@@ -3,23 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using WebSite.DBModels;
+using AutoMapper;
 
-namespace ModelsWithMapper
+namespace ModelsWithMapper.Mapper
 {
-    public class UserModel : UserBase
+    public class UserMapper
     {
-        public byte[] Photo { get; set; }
 
-        public HttpPostedFileBase PhotoFile { get; set; }
-
-        public string PhotoUrl { get; set; }
-
-        public string Address { get; set; }
-
-
-        public static User ToUser(UserModel userModel)
+        public static User ToUser(UserEditModel userModel)
         {
             User newUser = new User
             {
@@ -37,9 +29,9 @@ namespace ModelsWithMapper
 
         }
 
-        public static UserModel ToUserModel(User user)
+        public static UserEditModel ToUserModel(User user)
         {
-            UserModel newUser = new UserModel
+            UserEditModel newUser = new UserEditModel
             {
                 UserId = user.UserId,
                 Name = user.Name,
@@ -61,21 +53,9 @@ namespace ModelsWithMapper
             return newUser;
         }
 
-        public static IEnumerable<User> ToUserList(IEnumerable<UserModel> userModels)
+        public static IEnumerable<UserEditModel> ToUserModelList(IEnumerable<User> users)
         {
-            List<User> users = new List<User>();
-
-            foreach (var um in userModels)
-            {
-                users.Add(ToUser(um));
-            }
-
-            return users.AsEnumerable();
-        }
-
-        public static IEnumerable<UserModel> ToUserModelList(IEnumerable<User> users)
-        {
-            List<UserModel> userModels = new List<UserModel>();
+            List<UserEditModel> userModels = new List<UserEditModel>();
 
             foreach (var um in users)
             {
