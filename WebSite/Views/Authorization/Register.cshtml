@@ -1,10 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Регистрация";
+    ViewBag.Title = "Registration";
     Layout = "~/Views/Shared/AuthorizationLayout.cshtml";
 }
 
-<h1>Регистрация</h1>
+<h1>Registration</h1>
 
 @using (Html.BeginForm("Register", "Authorization", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -14,31 +14,31 @@
 
         <div class="form-group">
             <br />
-            <label for="inputName">Имя</label>
+            <label for="inputName">Name</label>
             <input type="text" class="form-control" id="inputName" name="name" required />
 
-            <label for="inputSurname">Фамилия</label>
+            <label for="inputSurname">Surname</label>
             <input type="text" class="form-control" id="inputSurname" name="surname" required />
 
-            <label for="inputAddress">Адрес</label>
+            <label for="inputAddress">Address</label>
             <input type="text" class="form-control" id="inputAddress" name="address" required />
 
-            <label for="inputAge">Возраст</label>
+            <label for="inputAge">Age</label>
             <input type="number" class="form-control" id="inputAge" name="age" required />
 
-            <label for="inputPassword">Пароль</label>
+            <label for="inputPassword">Password</label>
             <input type="password" class="form-control" id="inputPassword" name="password" required />
 
-            <label for="inputLogin">Логин</label>
+            <label for="inputLogin">Login</label>
             <input type="text" class="form-control" id="inputLogin" name="login" required />
 
-            <label for="inputPhotoFile">Фотография</label>
+            <label for="inputPhotoFile">Photo</label>
             <input type="file" class="form-control-file" id="inputPhotoFile" name="photofile" />
         </div>
 
         <label style="color: red">@ViewBag.ErrorMessage</label><br />
 
-        <button type="submit" class="btn btn-success">Подтвердить</button>
+        <button type="submit" class="btn btn-success">OK</button>
     </div>
 }
 

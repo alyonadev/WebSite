@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Профиль";
+    ViewBag.Title = "Profile";
 }
 
-<h1>Профиль</h1>
+<h1>Profile</h1>
 
 
 <div class="card mb-3" style="max-width: 740px;">
@@ -21,11 +21,11 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title"><b>@Model.Surname @Model.Name</b></h5>
-                <p style="font-size:  14pt;">Возраст: @Model.Age</p>
-                <p style="font-size:  14pt;">Адрес: @Model.Address</p>
+                <p style="font-size:  14pt;">Age: @Model.Age</p>
+                <p style="font-size:  14pt;">Address: @Model.Address</p>
                 <div>
-                    <button type="submit" class="btn btn-primary" onclick="window.open('@Url.Action("Edit", "User")')">Редактировать</button>
-                    <button type="submit" class="btn btn-danger" id="delete">Удалить</button>
+                    <button type="submit" class="btn btn-primary" onclick="window.open('@Url.Action("Edit", "User")')">Edit</button>
+                    <button type="submit" class="btn btn-danger" id="delete">Remove</button>
 
                 </div>
             </div>
@@ -39,7 +39,7 @@
         $(document).ready(function () {
 
             $("#delete").click(function () {
-                if (confirm("Вы действительно хотите удалить пользователя?")) {
+                if (confirm("Are you sure you want to remove user?")) {
                     window.location = '@Url.Action("Delete", "User")';
                 }
                 return false;

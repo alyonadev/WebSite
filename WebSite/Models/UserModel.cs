@@ -39,7 +39,6 @@ namespace WebSite.Models
                 Surname = userModel.Surname,
                 Address = userModel.Address,
                 Age = userModel.Age,
-                //Password = Hash(userModel.Password),
                 Password = userModel.Password,
                 Login = userModel.Login,
                 Photo = userModel.Photo
@@ -58,7 +57,6 @@ namespace WebSite.Models
                 Surname = user.Surname,
                 Address = user.Address,
                 Age = user.Age,
-                //Password = Hash(user.Password),
                 Password = user.Password,
                 Login = user.Login,
                 Photo = null,
@@ -77,14 +75,24 @@ namespace WebSite.Models
         public static IEnumerable<User> ToUserList(IEnumerable<UserModel> userModels)
         {
             List<User> users = new List<User>();
-            foreach (var um in userModels) users.Add(ToUser(um));
+
+            foreach (var um in userModels)
+            {
+                users.Add(ToUser(um));
+            }
+
             return users.AsEnumerable();
         }
 
         public static IEnumerable<UserModel> ToUserModelList(IEnumerable<User> users)
         {
             List<UserModel> userModels = new List<UserModel>();
-            foreach (var um in users) userModels.Add(ToUserModel(um));
+
+            foreach (var um in users)
+            { 
+                userModels.Add(ToUserModel(um)); 
+            }
+
             return userModels.AsEnumerable();
         }
 
@@ -100,13 +108,8 @@ namespace WebSite.Models
         {
             string userPhotoBase64Data = Convert.ToBase64String(photo);
             string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
+
             return imgDataURL;
-        }
-        public static string Hash(string value)
-        {
-            return Convert.ToBase64String(
-                System.Security.Cryptography.SHA256.Create()
-                .ComputeHash(Encoding.UTF8.GetBytes(value)));
         }
 
     }

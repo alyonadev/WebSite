@@ -23,11 +23,13 @@ namespace WebSite.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var users = UserModel.ToUserModelList(_userService.GetAllService());
+            var users = UserModel.ToUserModelList(_userService.GetAllUsersService());
+
             if (int.TryParse(User.Identity.Name, out int uid))
             {
                 users = users.Where(v => v.UserId != uid).AsEnumerable();
             }
+
             return View(users);
         }
 
@@ -37,9 +39,11 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                ViewBag.FromUser = UserModel.ToUserModel(_userService.GetByIdService(userId));
-                ViewBag.ToUser = UserModel.ToUserModel(_userService.GetByIdService(id));
-                var messages = _messageService.GetAllClientsService(userId, id);
+                ViewBag.FromUser = UserModel.ToUserModel(_userService.GetByIdUserService(userId));
+                ViewBag.ToUser = UserModel.ToUserModel(_userService.GetByIdUserService(id));
+
+                var messages = _messageService.GetAllUsersMessagesService(userId, id);
+
                 return View(messages);
             }
             else

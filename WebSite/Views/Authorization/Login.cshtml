@@ -1,10 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Авторизация";
+    ViewBag.Title = "Login";
     Layout = "~/Views/Shared/AuthorizationLayout.cshtml";
 }
 
-<h1>Авторизация</h1>
+<h1>Log in</h1>
 
 
 
@@ -17,13 +17,13 @@
 
         <div class="card-body">
             <div>
-                <input type="text" class="form-control" name="login" placeholder="Логин" required /><br />
-                <input type="password" class="form-control" name="password" placeholder="Пароль" required /><br />
+                <input type="text" class="form-control" name="login" placeholder="Login" required /><br />
+                <input type="password" class="form-control" name="password" placeholder="Password" required /><br />
             </div>
 
             <label style="color: red">@ViewBag.ErrorMessage</label><br />
 
-            <button type="submit" class="btn btn-success">Подтвердить</button>
+            <button type="submit" class="btn btn-success">OK</button>
         </div>
 
     </div>

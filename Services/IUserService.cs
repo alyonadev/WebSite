@@ -12,13 +12,19 @@ namespace Services
 {
     public interface IUserService
     {
-        List<User> GetAllService();
-        User GetByIdService(int id);
-        void AddService(User item);
-        void UpdateService(User item);
-        void DeleteService(int id);
-        byte[] GetBytePhotoService(HttpPostedFileBase file);
-        string GetURLPhotoService(byte[] photo);
-        string GetHashService(string value);
+        List<User> GetAllUsersService();
+
+        User GetByIdUserService(int id);
+
+        void AddUserService(User item);
+
+        void UpdateUserService(User item);
+
+        void DeleteUserService(int id);
+
+        byte[] GetBytePhotoUserService(HttpPostedFileBase file);
+
+        string GetURLPhotoUserService(byte[] photo);
+
     }
 }

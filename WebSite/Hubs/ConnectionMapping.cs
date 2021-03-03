@@ -22,8 +22,7 @@ namespace WebSite.Hubs
         {
             lock (_connections)
             {
-                HashSet<string> connections;
-                if (!_connections.TryGetValue(key, out connections))
+                if (!_connections.TryGetValue(key, out HashSet<string> connections))
                 {
                     connections = new HashSet<string>();
                     _connections.Add(key, connections);
@@ -38,8 +37,7 @@ namespace WebSite.Hubs
 
         public IEnumerable<string> GetConnections(T key)
         {
-            HashSet<string> connections;
-            if (_connections.TryGetValue(key, out connections))
+            if (_connections.TryGetValue(key, out HashSet<string> connections))
             {
                 return connections;
             }
@@ -51,8 +49,7 @@ namespace WebSite.Hubs
         {
             lock (_connections)
             {
-                HashSet<string> connections;
-                if (!_connections.TryGetValue(key, out connections))
+                if (!_connections.TryGetValue(key, out HashSet<string> connections))
                 {
                     return;
                 }

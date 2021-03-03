@@ -19,11 +19,14 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId)) 
             {
-                var user = UserModel.ToUserModel(_userService.GetByIdService(userId));
+                var user = UserModel.ToUserModel(_userService.GetByIdUserService(userId));
+
                 if (user.Photo != null)
                     user.PhotoUrl = UserModel.GetURLPhotoService(user.Photo);
+
                 return View(user);
             }
+
             return View();
         }
 
@@ -33,7 +36,8 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                UserModel user = UserModel.ToUserModel(_userService.GetByIdService(userId));
+                UserModel user = UserModel.ToUserModel(_userService.GetByIdUserService(userId));
+
                 return View(user);
             }
             else
@@ -48,13 +52,14 @@ namespace WebSite.Controllers
                 if (updatedUser.PhotoFile != null)
                     updatedUser.Photo = UserModel.GetBytePhotoService(updatedUser.PhotoFile);
 
-                _userService.UpdateService(UserModel.ToUser(updatedUser));
+                _userService.UpdateUserService(UserModel.ToUser(updatedUser));
 
                 return View(updatedUser);
             }
             catch (System.Exception)
             {
-                ViewBag.ErrorMessage = "Недопустимый возраст!";
+                ViewBag.ErrorMessage = "Invalid age!";
+
                 return View(updatedUser);
             }
         }
@@ -64,7 +69,8 @@ namespace WebSite.Controllers
             if (int.TryParse(User.Identity.Name, out int userId))
             {
                 FormsAuthentication.SignOut();
-                _userService.DeleteService(userId);
+
+                _userService.DeleteUserService(userId);
 
                 return RedirectToAction("Login", "Authorization");
             }

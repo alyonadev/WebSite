@@ -19,12 +19,12 @@ namespace Services
             _userRepository = new UserRepository(new WebSiteContext());
         }
 
-        public void AddService(User item)
+        public void AddUserService(User item)
         {
             _userRepository.Add(item);
         }
 
-        public void DeleteService(int id)
+        public void DeleteUserService(int id)
         {
             _userRepository.Delete(id);
         }
@@ -34,23 +34,24 @@ namespace Services
             _userRepository.Dispose();
         }
 
-        public List<User> GetAllService()
+        public List<User> GetAllUsersService()
         {
             IEnumerable<User> userList = _userRepository.GetAll();
+
             return userList.ToList();
         }
 
-        public User GetByIdService(int id)
+        public User GetByIdUserService(int id)
         {
             return _userRepository.GetById(id);
         }
 
-        public void UpdateService(User item)
+        public void UpdateUserService(User item)
         {
             _userRepository.Update(item);
         }
 
-        public byte[] GetBytePhotoService(HttpPostedFileBase photoFile)
+        public byte[] GetBytePhotoUserService(HttpPostedFileBase photoFile)
         {
             byte[] photoData = new byte[photoFile.ContentLength];
             photoFile.InputStream.Read(photoData, 0, photoFile.ContentLength);
@@ -58,12 +59,14 @@ namespace Services
             return photoData;
         }
 
-        public string GetURLPhotoService(byte[] photo)
+        public string GetURLPhotoUserService(byte[] photo)
         {
             string userPhotoBase64Data = Convert.ToBase64String(photo);
             string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
+
             return imgDataURL;
         }
+
         public string GetHashService(string value)
         {
             return Convert.ToBase64String(

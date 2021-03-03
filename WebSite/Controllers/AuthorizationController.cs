@@ -34,17 +34,19 @@ namespace WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _userService.GetAllService().
+                var user = _userService.GetAllUsersService().
                     FirstOrDefault(u => u.Login == login && u.Password == password);
 
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.UserId.ToString(), true);
+
                     return RedirectToAction("Index", "Message");
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = "Неверный логин или пароль!";
+                    ViewBag.ErrorMessage = "Incorrect login or password!";
+
                     return View();
                 }
             }
@@ -58,6 +60,7 @@ namespace WebSite.Controllers
         public ActionResult Logout()
         { 
             FormsAuthentication.SignOut();
+
             return RedirectToAction("Login", "Authorization");
         }
 
@@ -75,7 +78,7 @@ namespace WebSite.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = _userService.GetAllService().
+                    var user = _userService.GetAllUsersService().
                          FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
 
                     if (user == null)
@@ -83,9 +86,9 @@ namespace WebSite.Controllers
                         if (newUser.PhotoFile != null)
                             newUser.Photo = UserModel.GetBytePhotoService(newUser.PhotoFile);
 
-                        _userService.AddService(UserModel.ToUser(newUser));
+                        _userService.AddUserService(UserModel.ToUser(newUser));
 
-                        var userLogin = _userService.GetAllService().
+                        var userLogin = _userService.GetAllUsersService().
                             FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
 
                         FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
@@ -94,7 +97,8 @@ namespace WebSite.Controllers
                     }
                     else
                     {
-                        ViewBag.ErrorMessage = "Пользователь с таким логином и паролем уже существует!";
+                        ViewBag.ErrorMessage = "This user already exists!";
+
                         return View();
                     }
                 }
@@ -106,7 +110,8 @@ namespace WebSite.Controllers
             catch (System.Exception)
             {
 
-                ViewBag.ErrorMessage = "Недопустимый возраст!";
+                ViewBag.ErrorMessage = "Invalid age!";
+
                 return View();
             }
         }

@@ -11,17 +11,18 @@ namespace Services
     public class MessageService : IMessageService
     {
         private readonly IMessageRepository _messageRepository;
+
         public MessageService()
         {
             _messageRepository = new MessageRepository(new WebSiteContext());
         }
 
-        public void AddService(Message item)
+        public void AddMessageService(Message item)
         {
             _messageRepository.Add(item);
         }
 
-        public void DeleteService(int id)
+        public void DeleteMessageService(int id)
         {
             _messageRepository.Delete(id);
         }
@@ -31,20 +32,21 @@ namespace Services
             _messageRepository.Dispose();
         }
 
-        public List<Message> GetAllClientsService(int fromId, int toId)
+        public List<Message> GetAllUsersMessagesService(int fromId, int toId)
         {
             IEnumerable<Message> messageList = _messageRepository.GetAll().Where(v => 
             (v.From == fromId && v.To == toId) || 
             (v.From == toId && v.To == fromId));
+
             return messageList.ToList();
         }
 
-        public Message GetByIdService(int id)
+        public Message GetByIdMessageService(int id)
         {
             return _messageRepository.GetById(id);
         }
 
-        public void UpdateService(Message item)
+        public void UpdateMessageService(Message item)
         {
             _messageRepository.Update(item);
         }

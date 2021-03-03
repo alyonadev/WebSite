@@ -24,7 +24,7 @@ namespace WebSite.Hubs
 
         public async Task Send(string fromUserId, string toUserId, string from, string message)
         {
-            _messageService.AddService(new DBModels.Message
+            _messageService.AddMessageService(new DBModels.Message
             {
                 From = int.Parse(fromUserId),
                 To = int.Parse(toUserId),
@@ -39,6 +39,7 @@ namespace WebSite.Hubs
             {
                 await Clients.Client(connectionId).sendMessageAsync(from, message);
             }
+
             await Clients.Client(Context.ConnectionId).sendMessageAsync(from, message);
 
         }
@@ -46,24 +47,30 @@ namespace WebSite.Hubs
         public override Task OnConnected()
         {
             string name = Context.User.Identity.Name;
+
             _connections.Add(name, Context.ConnectionId);
+
             return base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
             string name = Context.User.Identity.Name;
+
             _connections.Remove(name, Context.ConnectionId);
+
             return base.OnDisconnected(stopCalled);
         }
 
         public override Task OnReconnected()
         {
             string name = Context.User.Identity.Name;
+
             if (!_connections.GetConnections(name).Contains(Context.ConnectionId))
             {
                 _connections.Add(name, Context.ConnectionId);
             }
+
             return base.OnReconnected();
         }
 

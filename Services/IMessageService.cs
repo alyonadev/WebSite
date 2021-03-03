@@ -5,10 +5,14 @@ namespace Services
 {
     public interface IMessageService
     {
-        List<Message> GetAllClientsService(int fromId, int toId);
-        Message GetByIdService(int id);
-        void AddService(Message item);
-        void UpdateService(Message item);
-        void DeleteService(int id);
+        List<Message> GetAllUsersMessagesService(int fromId, int toId);
+
+        Message GetByIdMessageService(int id);
+
+        void AddMessageService(Message item);
+
+        void UpdateMessageService(Message item);
+
+        void DeleteMessageService(int id);
     }
 }
