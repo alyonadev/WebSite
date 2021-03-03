@@ -25,12 +25,28 @@
                 <p style="font-size:  14pt;">Адрес: @Model.Address</p>
                 <div>
                     <button type="submit" class="btn btn-primary" onclick="window.open('@Url.Action("Edit", "User")')">Редактировать</button>
-                    <button type="submit" class="btn btn-danger" onclick="window.open('@Url.Action("Delete", "User")')">Удалить</button>
+                    <button type="submit" class="btn btn-danger" id="delete">Удалить</button>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#delete").click(function () {
+                if (confirm("Вы действительно хотите удалить пользователя?")) {
+                    window.location = '@Url.Action("Delete", "User")';
+                }
+                return false;
+            });
+        });
+
+    </script>
+}
 
 

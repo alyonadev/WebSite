@@ -86,7 +86,7 @@ namespace WebSite.Controllers
                         _userService.AddService(UserModel.ToUser(newUser));
 
                         var userLogin = _userService.GetAllService().
-                            FirstOrDefault(u => u.Login == newUser.Login && u.Password == _userService.GetHashService(newUser.Password));
+                            FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
 
                         FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
 
