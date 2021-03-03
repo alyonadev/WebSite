@@ -1,5 +1,4 @@
-﻿using ModelsWithMapper;
-using Services;
+﻿using Services;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -19,10 +18,10 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId)) 
             {
-                var user = UserEditModel.ToUserModel(_userService.GetByIdUserService(userId));
+                var user = UserMapper.ToUserModel(_userService.GetByIdUserService(userId));
 
                 if (user.Photo != null)
-                    user.PhotoUrl = UserEditModel.GetURLPhotoService(user.Photo);
+                    user.PhotoUrl = UserMapper.GetURLPhotoService(user.Photo);
 
                 return View(user);
             }
@@ -36,7 +35,7 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                UserEditModel user = UserEditModel.ToUserModel(_userService.GetByIdUserService(userId));
+                UserEditModel user = UserMapper.ToUserModel(_userService.GetByIdUserService(userId));
 
                 return View(user);
             }
@@ -50,9 +49,9 @@ namespace WebSite.Controllers
             try
             {
                 if (updatedUser.PhotoFile != null)
-                    updatedUser.Photo = UserEditModel.GetBytePhotoService(updatedUser.PhotoFile);
+                    updatedUser.Photo = UserMapper.GetBytePhotoService(updatedUser.PhotoFile);
 
-                _userService.UpdateUserService(UserEditModel.ToUser(updatedUser));
+                _userService.UpdateUserService(UserMapper.ToUser(updatedUser));
 
                 return View(updatedUser);
             }

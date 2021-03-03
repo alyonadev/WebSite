@@ -1,5 +1,4 @@
-﻿using ModelsWithMapper;
-using Services;
+﻿using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +22,7 @@ namespace WebSite.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var users = UserEditModel.ToUserModelList(_userService.GetAllUsersService());
+            var users = UserMapper.ToUserModelList(_userService.GetAllUsersService());
 
             if (int.TryParse(User.Identity.Name, out int uid))
             {
@@ -39,8 +38,8 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                ViewBag.FromUser = UserEditModel.ToUserModel(_userService.GetByIdUserService(userId));
-                ViewBag.ToUser = UserEditModel.ToUserModel(_userService.GetByIdUserService(id));
+                ViewBag.FromUser = UserMapper.ToUserModel(_userService.GetByIdUserService(userId));
+                ViewBag.ToUser = UserMapper.ToUserModel(_userService.GetByIdUserService(id));
 
                 var messages = _messageService.GetAllUsersMessagesService(userId, id);
 

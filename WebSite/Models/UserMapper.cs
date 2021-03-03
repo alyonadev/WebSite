@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using WebSite.DBModels;
 
-namespace ModelsWithMapper.Mapper
+namespace WebSite
 {
     public class UserMapper
     {
