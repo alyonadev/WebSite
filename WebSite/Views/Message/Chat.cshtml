@@ -25,15 +25,31 @@
             <h5 class="card-title">
                 @if (message.From == ViewBag.FromUser.UserId)
                 {
-                    @ViewBag.FromUser.Name
+                    if (ViewBag.FromUser.PhotoUrl == null)
+                    {
+                            <img src="~/img/defaultPhoto.jpg" width="100" height="100" />
+                    }
+                    else
+                    {
+                            <img src="@ViewBag.FromUser.PhotoUrl" width="100" height="100" />
+                    }
+                    @ViewBag.FromUser.Name   @ViewBag.FromUser.Surname
                 }
                 else
                 {
-                    @ViewBag.ToUser.Name
+                    if (ViewBag.ToUser.PhotoUrl == null)
+                    {
+                            <img src="~/img/defaultPhoto.jpg" width="100" height="100" />
+                    }
+                    else
+                    {
+                            <img src="@ViewBag.ToUser.PhotoUrl" width="100" height="100" />
+                    }
+                    @ViewBag.ToUser.Name   @ViewBag.ToUser.Surname
                 }
             </h5>
             <p class="card-text">@message.Text</p>
-            <p class="card-text"><small class="text-muted">Address:@message.Date</small></p>
+            <p class="card-text"><small class="text-muted">@message.Date</small></p>
         }
     </div>
 </div>

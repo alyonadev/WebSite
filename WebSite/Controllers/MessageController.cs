@@ -66,12 +66,24 @@ namespace WebSite.Controllers
         public ActionResult Chat(int id)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Message, IndexMessageViewModel>());
+            var configUser = new MapperConfiguration(cfg => cfg.CreateMap<User, IndexUserViewModel>());
+
             var mapper = new Mapper(config);
+            var mapperUser = new Mapper(configUser);
 
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                ViewBag.FromUser =_userService.GetByIdUserService(userId);
-                ViewBag.ToUser = _userService.GetByIdUserService(id);
+                var userFrom = mapperUser.Map<IndexUserViewModel>(_userService.GetByIdUserService(userId));
+                var userTo = mapperUser.Map<IndexUserViewModel>(_userService.GetByIdUserService(id));
+
+                if (userFrom.Photo.Length > 0)
+                    userFrom.PhotoUrl = _userService.GetURLPhotoUserService(userFrom.Photo);
+                
+                if (userTo.Photo.Length > 0)
+                    userTo.PhotoUrl = _userService.GetURLPhotoUserService(userTo.Photo);
+                
+                ViewBag.FromUser = userFrom;
+                ViewBag.ToUser = userTo;
 
                 var messages = mapper.Map<List<IndexMessageViewModel>>(_messageService.GetAllUsersMessagesService(userId, id));
 
