@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Security;
 using Services;
 using System.Linq;
+using AutoMapper;
+using WebSite.DBModels;
+using WebSite.Models.UserViewModel;
 
 namespace WebSite.Controllers
 {
@@ -69,21 +72,24 @@ namespace WebSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(UserAddModel newUser)
+        public ActionResult Register(AddUserViewModel addUser)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var user = _userService.GetAllUsersService().
-                         FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
+                         FirstOrDefault(u => u.Login == addUser.Login && u.Password == addUser.Password);
 
                     if (user == null)
                     {
-                        _userService.AddUserService(UserAddModel.ToUser(newUser));
+                        var config = new MapperConfiguration(cfg => cfg.CreateMap<AddUserViewModel, User>());
+                        var mapper = new Mapper(config);
+
+                        _userService.AddUserService(mapper.Map<AddUserViewModel, User>(addUser));
 
                         var userLogin = _userService.GetAllUsersService().
-                            FirstOrDefault(u => u.Login == newUser.Login && u.Password == newUser.Password);
+                            FirstOrDefault(u => u.Login == addUser.Login && u.Password == addUser.Password);
 
                         FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
 

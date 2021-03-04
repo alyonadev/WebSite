@@ -1,4 +1,4 @@
-﻿@model WebSite.Models.UserModel
+﻿@model WebSite.Models.UserViewModel.EditUserViewModel
 @{
     ViewBag.Title = "Edit user";
 }
@@ -31,7 +31,7 @@
         <label for="inputLogin">Login</label>
         <input type="text" class="form-control" id="inputLogin" name="login" value="@Model.Login" required />
 
-        <label for="inputPhotoFile">Photo</label>
+        <label for="inputPhotoFile">Photo</label><br/>
         <input type="file" class="form-control-file" id="inputPhotoFile" name="photofile">
     </div>
 

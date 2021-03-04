@@ -11,7 +11,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        @if (user.Photo == null)
+                        @if (user.PhotoUrl == null)
                         {
                             <img src="~/img/defaultPhoto.jpg" class="msg-usr-img" />
                         }
@@ -23,8 +23,8 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">@user.Surname @user.Name</h5>
-                            <p class="card-text">Age: @user.Age</p>
-                            <p class="card-text"><small class="text-muted">Address: @user.Address</small></p>
+                            <p class="card-text">count message</p>
+                            <p class="card-text"><small class="text-muted">last message</small></p>
                         </div>
                     </div>
                 </div>

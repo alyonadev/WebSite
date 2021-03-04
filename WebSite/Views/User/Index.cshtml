@@ -24,9 +24,8 @@
                 <p style="font-size:  14pt;">Age: @Model.Age</p>
                 <p style="font-size:  14pt;">Address: @Model.Address</p>
                 <div>
-                    <button type="submit" class="btn btn-primary" onclick="window.open('@Url.Action("Edit", "User")')">Edit</button>
+                    <button type="submit" class="btn btn-primary" id="edit">Edit</button>
                     <button type="submit" class="btn btn-danger" id="delete">Remove</button>
-
                 </div>
             </div>
         </div>
@@ -37,6 +36,9 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+            $("#edit").click(function () {
+                window.location = '@Url.Action("Edit", "User")';
+            });
 
             $("#delete").click(function () {
                 if (confirm("Are you sure you want to remove user?")) {
