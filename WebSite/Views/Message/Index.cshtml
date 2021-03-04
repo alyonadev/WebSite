@@ -5,26 +5,26 @@
 <h1>Message</h1>
 
 <div>
-    @foreach (var user in Model)
+    @foreach (var messages in Model)
     {
-        <a href="@Url.Action("Chat", "Message", new { id = user.UserId })" class="msg-usr">
+        <a href="@Url.Action("Chat", "Message", new { id = messages.UserId })" class="msg-usr">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        @if (user.PhotoUrl == null)
+                        @if (messages.PhotoUrl == null)
                         {
                             <img src="~/img/defaultPhoto.jpg" class="msg-usr-img" />
                         }
                         else
                         {
-                            <img src="@user.PhotoUrl" class="msg-usr-img" />
+                            <img src="@messages.PhotoUrl" class="msg-usr-img" />
                         }
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">@user.Surname @user.Name</h5>
-                            <p class="card-text">count message</p>
-                            <p class="card-text"><small class="text-muted">last message</small></p>
+                            <h5 class="card-title">@messages.Surname @messages.Name</h5>
+                            <p class="card-text">Count of unread: @messages.CountOfUnread</p>
+                            <p class="card-text"><small class="text-muted">Last message: </small></p>
                         </div>
                     </div>
                 </div>

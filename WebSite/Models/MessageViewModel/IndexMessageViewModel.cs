@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebSite.Models.UserViewModel;
 
 namespace WebSite.Models.MessageViewModel
 {
@@ -18,5 +19,16 @@ namespace WebSite.Models.MessageViewModel
         public DateTime Date { get; set; }
 
         public bool Status { get; set; }
+
+        public int CountOfUnread { get; set; }
+
+        public int UserId { get; set; }
+
+        public string Name { get; set; }
+
+        public string Surname { get; set; }
+
+        public string PhotoUrl { get; set; }
+
     }
 }

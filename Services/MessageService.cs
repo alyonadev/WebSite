@@ -41,6 +41,14 @@ namespace Services
             return messageList.ToList();
         }
 
+        public int GetUserUnreadMessagesService(int toId, int fromId)
+        {
+            int countMessage = _messageRepository.GetAll()
+                .Where(v => (v.From == fromId && v.To == toId && v.Status == false)).Count();
+
+            return countMessage;
+        }
+
         public Message GetByIdMessageService(int id)
         {
             return _messageRepository.GetById(id);

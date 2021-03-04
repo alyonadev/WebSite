@@ -26,15 +26,19 @@ namespace WebSite.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, IndexUserViewModel>());
-            var mapper = new Mapper(config);
+            var configUser = new MapperConfiguration(cfg => cfg.CreateMap<User, IndexUserViewModel>());
+            var configMessage = new MapperConfiguration(cfg => cfg.CreateMap<IndexUserViewModel, IndexMessageViewModel>());
 
-            var users = mapper.Map<List<IndexUserViewModel>>(_userService.GetAllUsersService());
+            var mapperUser = new Mapper(configUser);
+            var mapperMessage = new Mapper(configMessage);
+
+            var users = mapperUser.Map<List<IndexUserViewModel>>(_userService.GetAllUsersService());
 
             if (int.TryParse(User.Identity.Name, out int uid))
             {
                 users = users.FindAll(v => v.UserId != uid);
             }
+
             foreach (var u in users)
             {
                 if (u.Photo.Length > 0)
@@ -43,7 +47,17 @@ namespace WebSite.Controllers
                     u.PhotoUrl = null;
             }
 
-            return View(users);
+            var messages = mapperMessage.Map<List<IndexMessageViewModel>>(users);
+
+            foreach (var m in messages)
+            {
+                m.From = m.UserId;
+                m.To = uid;
+
+                m.CountOfUnread = _messageService.GetUserUnreadMessagesService(m.To, m.From);
+            }
+
+            return View(messages);
         }
 
         [Authorize]

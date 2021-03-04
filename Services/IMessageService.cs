@@ -14,5 +14,7 @@ namespace Services
         void UpdateMessageService(Message item);
 
         void DeleteMessageService(int id);
+
+        int GetUserUnreadMessagesService(int toId, int fromId);        
     }
 }
