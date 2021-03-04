@@ -21,6 +21,7 @@ namespace WebSite.Models.MessageViewModel
         public bool Status { get; set; }
 
         public int CountOfUnread { get; set; }
+        public string LastMessage { get; set; }
 
         public int UserId { get; set; }
 

@@ -15,6 +15,8 @@ namespace Services
 
         void DeleteMessageService(int id);
 
-        int GetUserUnreadMessagesService(int toId, int fromId);        
+        int GetUserUnreadMessagesService(int toId, int fromId); 
+
+        string GetLastUserMessagesService(int toId, int fromId);
     }
 }

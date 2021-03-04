@@ -55,6 +55,7 @@ namespace WebSite.Controllers
                 m.To = uid;
 
                 m.CountOfUnread = _messageService.GetUserUnreadMessagesService(m.To, m.From);
+                m.LastMessage = _messageService.GetLastUserMessagesService(m.To, m.From);
             }
 
             return View(messages);
