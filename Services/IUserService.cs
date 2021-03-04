@@ -22,9 +22,9 @@ namespace Services
 
         void DeleteUserService(int id);
 
-        byte[] GetBytePhotoUserService(HttpPostedFileBase file);
-
         string GetURLPhotoUserService(byte[] photo);
+
+        byte[] GetBytePhotoUserService(HttpPostedFileBase photoFile);
 
     }
 }
