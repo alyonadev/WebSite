@@ -51,12 +51,14 @@ namespace Services
 
         public string GetLastUserMessagesService(int toId, int fromId)
         {
-            string lastMessage = _messageRepository.GetAll().Where(v =>
+            var lastMessage = _messageRepository.GetAll().Where(v =>
             (v.From == fromId && v.To == toId) ||
             (v.From == toId && v.To == fromId))
-            .Reverse().FirstOrDefault().Text;
+            .LastOrDefault();
 
-            return lastMessage;
+            string textMessage = lastMessage != null ? lastMessage.Text : "";
+
+            return textMessage;
         }
 
         public Message GetByIdMessageService(int id)

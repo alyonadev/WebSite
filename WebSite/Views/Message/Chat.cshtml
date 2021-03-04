@@ -11,9 +11,10 @@
 <h1>Chat room</h1>
 
 <div class="form-group">
-    <label for="message" >Message</label><br/>
+    <label for="message">Message</label><br />
     <textarea type="text" id="message" class="form-control" placeholder="Message..."></textarea>
-</div><br/>
+</div>
+<br />
 
 <button type="button" class="btn btn-success" id="sendmessage">Send</button>
 
@@ -27,25 +28,25 @@
                 {
                     if (ViewBag.FromUser.PhotoUrl == null)
                     {
-                            <img src="~/img/defaultPhoto.jpg" width="100" height="100" />
+                        <img src="~/img/defaultPhoto.jpg" width="100" height="100" />
                     }
                     else
                     {
-                            <img src="@ViewBag.FromUser.PhotoUrl" width="100" height="100" />
+                        <img src="@ViewBag.FromUser.PhotoUrl" width="100" height="100" />
                     }
-                    @ViewBag.FromUser.Name   @ViewBag.FromUser.Surname
+                    @ViewBag.FromUser.Name
                 }
                 else
                 {
                     if (ViewBag.ToUser.PhotoUrl == null)
                     {
-                            <img src="~/img/defaultPhoto.jpg" width="100" height="100" />
+                        <img src="~/img/defaultPhoto.jpg" width="100" height="100" />
                     }
                     else
                     {
-                            <img src="@ViewBag.ToUser.PhotoUrl" width="100" height="100" />
+                        <img src="@ViewBag.ToUser.PhotoUrl" width="100" height="100" />
                     }
-                    @ViewBag.ToUser.Name   @ViewBag.ToUser.Surname
+                    @ViewBag.ToUser.Name
                 }
             </h5>
             <p class="card-text">@message.Text</p>
@@ -63,8 +64,7 @@
             var chat = $.connection.chatHub;
 
             chat.client.sendMessageAsync = function (from, message) {
-
-                $('#chat').append('<p><b>' + from + '</b>: ' + message + '</p>');
+                $('#chat').append('<h5 class="card-title"><img src="@ViewBag.PassedPhotoUrl" width="100" height="100" /><span>' + from + '</span></h5><p class="card-text">' + message + '</p><p class="card-text"><small class="text-muted">' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '</small></p>');
             };
 
             $.connection.hub.start().done(function () {

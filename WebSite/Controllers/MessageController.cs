@@ -84,6 +84,7 @@ namespace WebSite.Controllers
                 
                 ViewBag.FromUser = userFrom;
                 ViewBag.ToUser = userTo;
+                ViewBag.PassedPhotoUrl = userFrom.PhotoUrl ?? "/img/defaultPhoto.jpg";
 
                 var messages = mapper.Map<List<IndexMessageViewModel>>(_messageService.GetAllUsersMessagesService(userId, id));
 

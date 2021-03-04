@@ -23,6 +23,8 @@ namespace WebSite.Hubs
 
         public async Task Send(string fromUserId, string toUserId, string from, string message)
         {
+            var cids = _connections.GetConnections(toUserId);
+
             _messageService.AddMessageService(new DBModels.Message
             {
                 From = int.Parse(fromUserId),
@@ -31,12 +33,19 @@ namespace WebSite.Hubs
                 Text = message,
                 Status = false
             });
-            
-            var cids = _connections.GetConnections(toUserId);
-
+                        
             foreach (var connectionId in cids)
             {
                 await Clients.Client(connectionId).sendMessageAsync(from, message);
+
+                var messages = _messageService
+                    .GetAllUsersMessagesService(Convert.ToInt32(fromUserId), Convert.ToInt32(toUserId));
+
+                foreach (var m in messages)
+                {
+                    m.Status = true;
+                    _messageService.UpdateMessageService(m);
+                }
             }
 
             await Clients.Client(Context.ConnectionId).sendMessageAsync(from, message);
