@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace WebSite
+namespace WebSite.Models.MessageViewModel
 {
-    public class MessageModel
+    public class AddMessageViewModel
     {
-        public int MessageId { get; set; }
-
         public int From { get; set; }
 
         public int To { get; set; }
@@ -18,5 +15,6 @@ namespace WebSite
 
         public DateTime Date { get; set; }
 
+        public bool Status { get; set; }
     }
 }

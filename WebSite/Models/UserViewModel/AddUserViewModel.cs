@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace WebSite
+namespace WebSite.Models.UserViewModel
 {
-    public class UserBase
+    public class AddUserViewModel
     {
-        public int UserId { get; set; }
-
         public string Name { get; set; }
 
         public string Surname { get; set; }
@@ -19,7 +16,5 @@ namespace WebSite
         public string Login { get; set; }
 
         public string Password { get; set; }
-
-       
     }
 }
