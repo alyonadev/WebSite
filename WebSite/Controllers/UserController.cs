@@ -19,39 +19,53 @@ namespace WebSite.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, IndexUserViewModel>());
-            var mapper = new Mapper(config);
-
-            if (int.TryParse(User.Identity.Name, out int userId)) 
+            try
             {
-                var user = mapper.Map<IndexUserViewModel>(_userService.GetByIdUserService(userId));
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<User, IndexUserViewModel>());
+                var mapper = new Mapper(config);
 
-                if (user.Photo.Length > 0)
+                if (int.TryParse(User.Identity.Name, out int userId))
                 {
-                    user.PhotoUrl = _userService.GetURLPhotoUserService(user.Photo);
+                    var user = mapper.Map<IndexUserViewModel>(_userService.GetByIdUserService(userId));
+
+                    if (user.Photo.Length > 0)
+                    {
+                        user.PhotoUrl = _userService.GetURLPhotoUserService(user.Photo);
+                    }
+
+                    return View(user);
                 }
 
-                return View(user);
+                return View();
             }
-
-            return View();
+            catch (System.Exception)
+            {
+                return View("Error");
+            }
         }
 
         [Authorize]
         [HttpGet]
         public ActionResult Edit()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, EditUserViewModel>());
-            var mapper = new Mapper(config);
-
-            if (int.TryParse(User.Identity.Name, out int userId))
+            try
             {
-                EditUserViewModel user = mapper.Map<EditUserViewModel>(_userService.GetByIdUserService(userId));
-                
-                return View(user);
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<User, EditUserViewModel>());
+                var mapper = new Mapper(config);
+
+                if (int.TryParse(User.Identity.Name, out int userId))
+                {
+                    EditUserViewModel user = mapper.Map<EditUserViewModel>(_userService.GetByIdUserService(userId));
+
+                    return View(user);
+                }
+                else
+                    return RedirectToAction("Index", "User");
             }
-            else
-                return RedirectToAction("Index", "User");
+            catch (System.Exception)
+            {
+                return View("Error");
+            }
         }
 
         [HttpPost]
@@ -67,30 +81,44 @@ namespace WebSite.Controllers
                     updatedUser.Photo = _userService.GetBytePhotoUserService(updatedUser.PhotoFile);
                 }
 
-                 _userService.UpdateUserService(mapper.Map<User>(updatedUser));
+                if (updatedUser.Age < 6 && updatedUser.Age > 80)
+                {
+                    ViewBag.ErrorMessage = "Invalid age!";
+
+                    return View(updatedUser);
+                }
+                else
+                {
+                    _userService.UpdateUserService(mapper.Map<User>(updatedUser));
+                }                
 
                 return RedirectToAction("Index", "User");
             }
             catch (System.Exception)
             {
-                ViewBag.ErrorMessage = "Invalid age!";
-
-                return View(updatedUser);
+                return View("Error");
             }
         }
 
         public ActionResult Delete()
         {
-            if (int.TryParse(User.Identity.Name, out int userId))
+            try
             {
-                FormsAuthentication.SignOut();
+                if (int.TryParse(User.Identity.Name, out int userId))
+                {
+                    FormsAuthentication.SignOut();
 
-                _userService.DeleteUserService(userId);
+                    _userService.DeleteUserService(userId);
 
-                return RedirectToAction("Login", "Authorization");
+                    return RedirectToAction("Login", "Authorization");
+                }
+                else
+                    return RedirectToAction("Index", "User");
             }
-            else
-                return RedirectToAction("Index", "User");
+            catch (System.Exception)
+            {
+                return View("Error");
+            }
         }
 
     }

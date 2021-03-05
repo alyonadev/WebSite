@@ -32,28 +32,35 @@ namespace WebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string login, string password)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = _userService.GetAllUsersService().
-                    FirstOrDefault(u => u.Login == login && u.Password == password);
-
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserId.ToString(), true);
+                    var user = _userService.GetAllUsersService().
+                        FirstOrDefault(u => u.Login == login && u.Password == password);
 
-                    return RedirectToAction("Index", "Message");
+                    if (user != null)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.UserId.ToString(), true);
+
+                        return RedirectToAction("Index", "Message");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Incorrect login or password!";
+
+                        return View();
+                    }
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = "Incorrect login or password!";
-
                     return View();
                 }
             }
-            else
+            catch (System.Exception)
             {
-                return View();
-            }                
+                return View("Error");
+            }              
             
         }
 
@@ -95,6 +102,12 @@ namespace WebSite.Controllers
 
                         return RedirectToAction("Index", "User");
                     }
+                    else if(user.Age < 6 && user.Age > 80)
+                    {
+                        ViewBag.ErrorMessage = "Invalid age!";
+
+                        return View();
+                    }
                     else
                     {
                         ViewBag.ErrorMessage = "This user already exists!";
@@ -109,10 +122,7 @@ namespace WebSite.Controllers
             }
             catch (System.Exception)
             {
-
-                ViewBag.ErrorMessage = "Invalid age!";
-
-                return View();
+                return View("Error");                
             }
         }
        
