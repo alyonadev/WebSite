@@ -11,15 +11,15 @@
 <h1>Chat room</h1>
 
 <div class="form-group">
-    <label for="message">Message</label><br />
+    <label for="message" class="chat-text">Message</label><br />
     <textarea type="text" id="message" class="form-control" placeholder="Message..."></textarea>
 </div>
 <br />
 
-<button type="button" class="btn btn-success" id="sendmessage">Send</button>
+<button type="button" class="btn btn-success" id="sendmessage">Send</button><br /><br />
 
 <div class="form-group">
-    <label for="chat">Message history</label><br />
+    <label for="chat" class="chat-text">Message history</label><br />
     <div id="chat" class="card">
         @foreach (var message in Model)
         {
@@ -28,11 +28,11 @@
                 {
                     if (ViewBag.FromUser.PhotoUrl == null)
                     {
-                        <img src="~/img/defaultPhoto.jpg" width="100" height="100" />
+                        <img src="~/img/defaultPhoto.jpg" class="chat-img" />
                     }
                     else
                     {
-                        <img src="@ViewBag.FromUser.PhotoUrl" width="100" height="100" />
+                        <img src="@ViewBag.FromUser.PhotoUrl" class="chat-img" />
                     }
                     @ViewBag.FromUser.Name
                 }
@@ -40,16 +40,16 @@
                 {
                     if (ViewBag.ToUser.PhotoUrl == null)
                     {
-                        <img src="~/img/defaultPhoto.jpg" width="100" height="100" />
+                        <img src="~/img/defaultPhoto.jpg" class="chat-img" />
                     }
                     else
                     {
-                        <img src="@ViewBag.ToUser.PhotoUrl" width="100" height="100" />
+                        <img src="@ViewBag.ToUser.PhotoUrl" class="chat-img" />
                     }
                     @ViewBag.ToUser.Name
                 }
             </h5>
-            <p class="card-text">@message.Text</p>
+            <p class="card-text">Message: @message.Text</p>
             <p class="card-text"><small class="text-muted">@message.Date</small></p>
         }
     </div>
@@ -64,21 +64,20 @@
             var chat = $.connection.chatHub;
 
             chat.client.sendMessageAsync = function (from, message) {
-                $('#chat').append('<h5 class="card-title"><img src="@ViewBag.PassedPhotoUrl" width="100" height="100" /><span>' + from + '</span></h5><p class="card-text">' + message + '</p><p class="card-text"><small class="text-muted">' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '</small></p>');
+                $('#chat').append('<h5 class="card-title"><img src="@ViewBag.PassedPhotoUrl" class="chat-img" /><span>' + from + '</span></h5><p class="card-text">Message: ' + message + '</p><p class="card-text"><small class="text-muted">' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '</small></p>');
             };
 
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
-                    chat.server.send(
-                        $('#fromUserId').val(),
-                        $('#toUserId').val(),
-                        $('#fromName').val(),
-                        $('#message').val());
+                chat.server.send(
+                    $('#fromUserId').val(),
+                    $('#toUserId').val(),
+                    $('#fromName').val(),
+                    $('#message').val());
                     $('#message').val('').focus();
                 });
             });
         });
-
     </script>
 
 }

@@ -90,23 +90,26 @@ namespace WebSite.Controllers
 
                     if (user == null)
                     {
-                        var config = new MapperConfiguration(cfg => cfg.CreateMap<AddUserViewModel, User>());
-                        var mapper = new Mapper(config);
+                        if (addUser.Age < 6 || addUser.Age > 80)
+                        {
+                            ViewBag.ErrorMessage = "Invalid age!";
 
-                        _userService.AddUserService(mapper.Map<AddUserViewModel, User>(addUser));
+                            return View();
+                        }
+                        else
+                        {
+                            var config = new MapperConfiguration(cfg => cfg.CreateMap<AddUserViewModel, User>());
+                            var mapper = new Mapper(config);
 
-                        var userLogin = _userService.GetAllUsersService().
-                            FirstOrDefault(u => u.Login == addUser.Login && u.Password == addUser.Password);
+                            _userService.AddUserService(mapper.Map<AddUserViewModel, User>(addUser));
 
-                        FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
+                            var userLogin = _userService.GetAllUsersService().
+                                FirstOrDefault(u => u.Login == addUser.Login && u.Password == addUser.Password);
 
-                        return RedirectToAction("Index", "User");
-                    }
-                    else if(user.Age < 6 && user.Age > 80)
-                    {
-                        ViewBag.ErrorMessage = "Invalid age!";
+                            FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
 
-                        return View();
+                            return RedirectToAction("Index", "User");
+                        }                        
                     }
                     else
                     {
@@ -114,7 +117,7 @@ namespace WebSite.Controllers
 
                         return View();
                     }
-                }
+                }                
                 else
                 {
                     return View();

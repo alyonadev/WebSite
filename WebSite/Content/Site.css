@@ -13,6 +13,21 @@
     margin-top: 90px;
 }
 
+.chat-text{
+    font-size: 20pt;
+}
+
+.chat-img {
+    width: 70px;
+    border-radius: 100px;
+    margin-right: 20px;
+}
+
+.error {
+    color: red;
+    font-size: 14pt;
+    margin-bottom: 10px;
+}
 
 
 

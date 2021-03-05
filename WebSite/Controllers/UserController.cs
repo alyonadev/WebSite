@@ -81,7 +81,7 @@ namespace WebSite.Controllers
                     updatedUser.Photo = _userService.GetBytePhotoUserService(updatedUser.PhotoFile);
                 }
 
-                if (updatedUser.Age < 6 && updatedUser.Age > 80)
+                if (updatedUser.Age < 6 || updatedUser.Age > 80)
                 {
                     ViewBag.ErrorMessage = "Invalid age!";
 
@@ -90,9 +90,9 @@ namespace WebSite.Controllers
                 else
                 {
                     _userService.UpdateUserService(mapper.Map<User>(updatedUser));
-                }                
 
-                return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "User");
+                }            
             }
             catch (System.Exception)
             {
