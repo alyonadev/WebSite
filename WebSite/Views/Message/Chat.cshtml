@@ -49,8 +49,8 @@
                     @ViewBag.ToUser.Name
                 }
             </h5>
-            <p class="card-text">Message: @message.Text</p>
-            <p class="card-text"><small class="text-muted">@message.Date</small></p>
+            <p class="card-text" style="margin-left:10px;">Message: @message.Text</p>
+            <p class="card-text" style="margin-left:10px;"><small class="text-muted">@message.Date</small></p>
         }
     </div>
 </div>
@@ -64,7 +64,7 @@
             var chat = $.connection.chatHub;
 
             chat.client.sendMessageAsync = function (from, message) {
-                $('#chat').append('<h5 class="card-title"><img src="@ViewBag.PassedPhotoUrl" class="chat-img" /><span>' + from + '</span></h5><p class="card-text">Message: ' + message + '</p><p class="card-text"><small class="text-muted">' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '</small></p>');
+                $('#chat').append('<h5 class="card-title"><img src="@ViewBag.PassedPhotoUrl" class="chat-img" /><span>' + from + '</span></h5><p class="card-text" style="margin-left:10px;">Message: ' + message + '</p><p class="card-text" style="margin-left:10px;"><small class="text-muted">' + new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString() + '</small></p>');
             };
 
             $.connection.hub.start().done(function () {
