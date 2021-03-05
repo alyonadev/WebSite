@@ -74,6 +74,8 @@ namespace WebSite.Controllers
         {
             try
             {
+                ReadMessages(id);
+
                 var config = new MapperConfiguration(cfg => cfg.CreateMap<Message, IndexMessageViewModel>());
                 var configUser = new MapperConfiguration(cfg => cfg.CreateMap<User, IndexUserViewModel>());
 
@@ -106,6 +108,26 @@ namespace WebSite.Controllers
             {
                 return View("Error");
             }
+        }
+
+        public void ReadMessages(int id)
+        {
+            if (int.TryParse(User.Identity.Name, out int userId))
+            {
+                var userFrom = _userService.GetByIdUserService(userId);
+                var userTo = _userService.GetByIdUserService(id);
+
+                var messageList = _messageService
+                .GetAllUsersMessagesService(userFrom.UserId, userTo.UserId)
+                .Where(v => (v.From == userTo.UserId && v.To == userFrom.UserId));
+
+                foreach (var message in messageList)
+                {
+                    message.Status = true;
+                    _messageService.UpdateMessageService(message);
+                }
+            }
+            
         }
 
     }

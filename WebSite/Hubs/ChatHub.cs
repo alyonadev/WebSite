@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-
+using WebSite.DBModels;
 
 namespace WebSite.Hubs
 {
@@ -25,7 +25,7 @@ namespace WebSite.Hubs
         {
             var cids = _connections.GetConnections(toUserId);
 
-            _messageService.AddMessageService(new DBModels.Message
+            _messageService.AddMessageService(new Message
             {
                 From = int.Parse(fromUserId),
                 To = int.Parse(toUserId),
@@ -37,15 +37,6 @@ namespace WebSite.Hubs
             foreach (var connectionId in cids)
             {
                 await Clients.Client(connectionId).sendMessageAsync(from, message);
-
-                var messages = _messageService
-                    .GetAllUsersMessagesService(Convert.ToInt32(fromUserId), Convert.ToInt32(toUserId));
-
-                foreach (var m in messages)
-                {
-                    m.Status = true;
-                    _messageService.UpdateMessageService(m);
-                }
             }
 
             await Clients.Client(Context.ConnectionId).sendMessageAsync(from, message);
