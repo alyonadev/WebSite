@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DBModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using WebSite.DBModels;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebSite.Repository
+namespace Repository
 {
     public class MessageRepository : IMessageRepository
     {
@@ -45,8 +46,5 @@ namespace WebSite.Repository
             _context.Messages.Remove(message);
             _context.SaveChanges();
         }
-
-        private bool disposed = false;
-
     }
 }

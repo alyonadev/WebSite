@@ -1,9 +1,11 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Web;
-using WebSite.DBModels;
+﻿using DBModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebSite.Repository
+namespace Repository
 {
     public interface IUserRepository : IRepository<User>
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebSite.DBModels;
+using DBModels;
 using WebSite.Models.MessageViewModel;
 using WebSite.Models.UserViewModel;
 

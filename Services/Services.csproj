@@ -49,12 +49,12 @@
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\DBModels.csproj">
-      <Project>{DD727461-BFE8-48DE-B8CF-D9FC3A55693F}</Project>
+    <ProjectReference Include="..\DBModels\DBModels.csproj">
+      <Project>{e535aa2b-3074-40e8-9b5a-764765770a29}</Project>
       <Name>DBModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{dfa59423-7c40-4352-a2e6-3ea4cb49ed2c}</Project>
+      <Project>{31772b5f-4485-4de0-af5c-e6aa283a4ba6}</Project>
       <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>

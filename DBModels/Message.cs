@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebSite.DBModels
+namespace DBModels
 {
-    [Table ("Message")]
+    [Table("Message")]
     public class Message
     {
         [Key]
-        public int MessageId { get; set; }
-
-        public int From { get; set; }
-
-        public int To { get; set; }
+        public Guid MessageId { get; set; }
 
         [Required]
         public string Text { get; set; }
@@ -23,8 +20,5 @@ namespace WebSite.DBModels
         public DateTime Date { get; set; }
 
         public bool Status { get; set; }
-
-        
-
     }
 }

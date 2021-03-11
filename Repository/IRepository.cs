@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebSite.Repository
+namespace Repository
 {
     public interface IRepository<T>
     {
@@ -14,7 +17,5 @@ namespace WebSite.Repository
         void Update(T item);
 
         void Delete(int id);
-
-        
     }
 }

@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using WebSite.DBModels;
-using WebSite.Repository;
+using DBModels;
+using Repository;
 
 namespace Services
 {

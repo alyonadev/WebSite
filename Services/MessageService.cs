@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebSite.DBModels;
-using WebSite.Repository;
+using DBModels;
+using Repository;
 
 namespace Services
 {
@@ -25,11 +25,6 @@ namespace Services
         public void DeleteMessageService(int id)
         {
             _messageRepository.Delete(id);
-        }
-
-        public void DisposeService()
-        {
-            _messageRepository.Dispose();
         }
 
         public List<Message> GetAllUsersMessagesService(int fromId, int toId)

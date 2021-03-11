@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DFA59423-7C40-4352-A2E6-3EA4CB49ED2C}</ProjectGuid>
+    <ProjectGuid>{31772B5F-4485-4DE0-AF5C-E6AA283A4BA6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Repository</RootNamespace>
@@ -43,7 +43,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,12 +55,12 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="MessageRepository.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\DBModels.csproj">
-      <Project>{dd727461-bfe8-48de-b8cf-d9fc3a55693f}</Project>
+    <ProjectReference Include="..\DBModels\DBModels.csproj">
+      <Project>{e535aa2b-3074-40e8-9b5a-764765770a29}</Project>
       <Name>DBModels</Name>
     </ProjectReference>
   </ItemGroup>

@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using WebSite.DBModels;
-using WebSite.Repository;
+using DBModels;
+using Repository;
 
 namespace Services
 {
@@ -27,11 +27,6 @@ namespace Services
         public void DeleteUserService(int id)
         {
             _userRepository.Delete(id);
-        }
-
-        public void DisposeService()
-        {
-            _userRepository.Dispose();
         }
 
         public List<User> GetAllUsersService()

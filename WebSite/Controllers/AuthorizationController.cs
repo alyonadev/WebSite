@@ -7,7 +7,7 @@ using System.Web.Security;
 using Services;
 using System.Linq;
 using AutoMapper;
-using WebSite.DBModels;
+using DBModels;
 using WebSite.Models.UserViewModel;
 
 namespace WebSite.Controllers

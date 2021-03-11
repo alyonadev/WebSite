@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD727461-BFE8-48DE-B8CF-D9FC3A55693F}</ProjectGuid>
+    <ProjectGuid>{E535AA2B-3074-40E8-9B5A-764765770A29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Models</RootNamespace>
-    <AssemblyName>Models</AssemblyName>
+    <RootNamespace>DBModels</RootNamespace>
+    <AssemblyName>DBModels</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -51,59 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialog.cs" />
     <Compile Include="Message.cs" />
-    <Compile Include="Migrations\202102040859421_InitialCreate.cs" />
-    <Compile Include="Migrations\202102040859421_InitialCreate.Designer.cs">
-      <DependentUpon>202102040859421_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102040922503_AddPasswordField.cs" />
-    <Compile Include="Migrations\202102040922503_AddPasswordField.Designer.cs">
-      <DependentUpon>202102040922503_AddPasswordField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102040957523_ChangeTupeToIntOnFieldsFromAndTo.cs" />
-    <Compile Include="Migrations\202102040957523_ChangeTupeToIntOnFieldsFromAndTo.Designer.cs">
-      <DependentUpon>202102040957523_ChangeTupeToIntOnFieldsFromAndTo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102041020214_ChangeTypeToPfoto.cs" />
-    <Compile Include="Migrations\202102041020214_ChangeTypeToPfoto.Designer.cs">
-      <DependentUpon>202102041020214_ChangeTypeToPfoto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102041024597_InstallMaxLengthToAddress.cs" />
-    <Compile Include="Migrations\202102041024597_InstallMaxLengthToAddress.Designer.cs">
-      <DependentUpon>202102041024597_InstallMaxLengthToAddress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202102110817502_AddLognToUser.cs" />
-    <Compile Include="Migrations\202102110817502_AddLognToUser.Designer.cs">
-      <DependentUpon>202102110817502_AddLognToUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebSiteContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202102040859421_InitialCreate.resx">
-      <DependentUpon>202102040859421_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102040922503_AddPasswordField.resx">
-      <DependentUpon>202102040922503_AddPasswordField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102040957523_ChangeTupeToIntOnFieldsFromAndTo.resx">
-      <DependentUpon>202102040957523_ChangeTupeToIntOnFieldsFromAndTo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102041020214_ChangeTypeToPfoto.resx">
-      <DependentUpon>202102041020214_ChangeTypeToPfoto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102041024597_InstallMaxLengthToAddress.resx">
-      <DependentUpon>202102041024597_InstallMaxLengthToAddress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202102110817502_AddLognToUser.resx">
-      <DependentUpon>202102110817502_AddLognToUser.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,20 +1,19 @@
-﻿using System;
+﻿using DBModels;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
-using System.Web;
-using WebSite.DBModels;
+using System.Threading.Tasks;
 
-namespace WebSite.Repository
+namespace Repository
 {
     public class UserRepository : IUserRepository
     {
         private readonly WebSiteContext _context;
 
         public UserRepository(WebSiteContext context)
-        {            
+        {
             _context = context;
         }
 

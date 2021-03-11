@@ -2,7 +2,7 @@
 using Services;
 using System.Web.Mvc;
 using System.Web.Security;
-using WebSite.DBModels;
+using DBModels;
 using WebSite.Models.UserViewModel;
 
 namespace WebSite.Controllers
