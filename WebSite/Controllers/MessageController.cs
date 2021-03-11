@@ -110,7 +110,7 @@ namespace WebSite.Controllers
             }
         }
 
-        public void ReadMessages(int id)
+        private void ReadMessages(int id)
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
