@@ -43,8 +43,8 @@ namespace Services
         {
             var dialog = _dialogRepository.GetAll()
                 .FirstOrDefault(d => 
-                (d.From == from && d.To == to) ||
-                (d.From == to && d.To == from));
+                (d.FromUserId == from && d.ToUserId == to) ||
+                (d.FromUserId == to && d.ToUserId == from));
 
             return dialog;
         }

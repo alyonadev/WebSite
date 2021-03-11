@@ -16,11 +16,15 @@ namespace DBModels
             [Key]
             public Guid DialogId { get; set; }
 
-            [ForeignKey("From")]
-            public User FromUserId { get; set; }
+            public int FromUserId { get; set; }
 
-            [ForeignKey("To")]
-            public User ToUserId { get; set; }
+            [ForeignKey("FromUserId")]
+            public virtual User From { get; set; }
+
+            public int ToUserId { get; set; }
+
+            [ForeignKey("ToUserId")]
+            public virtual User To { get; set; }
         }
     }
 }

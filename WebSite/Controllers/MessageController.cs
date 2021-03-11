@@ -116,7 +116,7 @@ namespace WebSite.Controllers
 
                 var messageList = _messageService
                     .GetAllDialogMessagesService(userFrom.UserId, userTo.UserId)
-                    .Where(v => (v.From == userTo.UserId && v.To == userFrom.UserId));
+                    .Where(v => (v.FromUserId == userTo.UserId && v.ToUserId == userFrom.UserId));
 
                 var mes = _dialogService.
 
