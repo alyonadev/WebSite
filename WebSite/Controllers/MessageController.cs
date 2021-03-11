@@ -15,11 +15,13 @@ namespace WebSite.Controllers
     {
         private readonly IMessageService _messageService;
         private readonly IUserService _userService;
+        private readonly IDialogService _dialogService;
 
         public MessageController()
         {
             _messageService = new MessageService();
             _userService = new UserService();
+            _dialogService = new DialogService();
         }
 
         [Authorize]
@@ -43,21 +45,17 @@ namespace WebSite.Controllers
 
                 foreach (var u in users)
                 {
-                    if (u.Photo.Length > 0)
-                        u.PhotoUrl = _userService.GetURLPhotoUserService(u.Photo);
-                    else
-                        u.PhotoUrl = null;
+                    u.PhotoUrl = null;
                 }
 
                 var messages = mapperMessage.Map<List<IndexMessageViewModel>>(users);
 
                 foreach (var m in messages)
                 {
-                    m.From = m.UserId;
-                    m.To = uid;
+                    var dialog = _dialogService.GetDialogService(m.UserId, uid);
 
-                    m.CountOfUnread = _messageService.GetUserUnreadMessagesService(m.To, m.From);
-                    m.LastMessage = _messageService.GetLastUserMessagesService(m.To, m.From);
+                    m.CountOfUnread = _messageService.GetUnreadMessagesService(dialog.DialogId);
+                    m.LastMessage = _messageService.GetLastUserMessagesService(dialog.DialogId);
                 }
 
                 return View(messages);
@@ -84,20 +82,19 @@ namespace WebSite.Controllers
 
                 if (int.TryParse(User.Identity.Name, out int userId))
                 {
-                    var userFrom = mapperUser.Map<IndexUserViewModel>(_userService.GetByIdUserService(userId));
-                    var userTo = mapperUser.Map<IndexUserViewModel>(_userService.GetByIdUserService(id));
+                    var userFrom = mapperUser.Map<IndexUserViewModel>(_userService.GetUserService(userId));
+                    var userTo = mapperUser.Map<IndexUserViewModel>(_userService.GetUserService(id));
 
-                    if (userFrom.Photo.Length > 0)
-                        userFrom.PhotoUrl = _userService.GetURLPhotoUserService(userFrom.Photo);
-
-                    if (userTo.Photo.Length > 0)
-                        userTo.PhotoUrl = _userService.GetURLPhotoUserService(userTo.Photo);
+                    userFrom.PhotoUrl = _userService.GetURLPhotoUserService(userFrom.Photo);
+                    userTo.PhotoUrl = _userService.GetURLPhotoUserService(userTo.Photo);
 
                     ViewBag.FromUser = userFrom;
                     ViewBag.ToUser = userTo;
                     ViewBag.PassedPhotoUrl = userFrom.PhotoUrl ?? "/img/defaultPhoto.jpg";
 
-                    var messages = mapper.Map<List<IndexMessageViewModel>>(_messageService.GetAllUsersMessagesService(userId, id));
+                    var dialog = _dialogService.GetDialogService(userId, id);
+
+                    var messages = mapper.Map<List<IndexMessageViewModel>>(_messageService.GetAllDialogMessagesService(dialog.DialogId));
 
                     return View(messages);
                 }
@@ -114,12 +111,14 @@ namespace WebSite.Controllers
         {
             if (int.TryParse(User.Identity.Name, out int userId))
             {
-                var userFrom = _userService.GetByIdUserService(userId);
-                var userTo = _userService.GetByIdUserService(id);
+                var userFrom = _userService.GetUserService(userId);
+                var userTo = _userService.GetUserService(id);
 
                 var messageList = _messageService
-                .GetAllUsersMessagesService(userFrom.UserId, userTo.UserId)
-                .Where(v => (v.From == userTo.UserId && v.To == userFrom.UserId));
+                    .GetAllDialogMessagesService(userFrom.UserId, userTo.UserId)
+                    .Where(v => (v.From == userTo.UserId && v.To == userFrom.UserId));
+
+                var mes = _dialogService.
 
                 foreach (var message in messageList)
                 {

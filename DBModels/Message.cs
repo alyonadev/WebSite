@@ -14,6 +14,9 @@ namespace DBModels
         [Key]
         public Guid MessageId { get; set; }
 
+        [ForeignKey("DialogId")]
+        public Dialog DialogId { get; set; }
+
         [Required]
         public string Text { get; set; }
 

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Security;
 using DBModels;
 using Repository;
 
@@ -26,6 +27,7 @@ namespace Services
 
         public void DeleteUserService(int id)
         {
+            FormsAuthentication.SignOut();
             _userRepository.Delete(id);
         }
 
@@ -36,9 +38,17 @@ namespace Services
             return userList.ToList();
         }
 
-        public User GetByIdUserService(int id)
+        public User GetUserService(int id)
         {
             return _userRepository.GetById(id);
+        }
+
+        public User GetUserService(string login, string password)
+        {
+            var user = _userRepository.GetAll()
+                .FirstOrDefault(u => u.Login == login && u.Password == password);
+
+            return user;
         }
 
         public void UpdateUserService(User item)
@@ -49,17 +59,25 @@ namespace Services
         public byte[] GetBytePhotoUserService(HttpPostedFileBase photoFile)
         {
             byte[] photoData = new byte[photoFile.ContentLength];
-            photoFile.InputStream.Read(photoData, 0, photoFile.ContentLength);
 
-            return photoData;
+            if (photoFile != null)
+            {
+                photoFile.InputStream.Read(photoData, 0, photoFile.ContentLength);
+            }
+
+            return photoData;            
         }
 
         public string GetURLPhotoUserService(byte[] photo)
         {
-            string userPhotoBase64Data = Convert.ToBase64String(photo);
-            string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
+            if (photo.Length > 0)
+            {
+                string userPhotoBase64Data = Convert.ToBase64String(photo);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", userPhotoBase64Data);
 
-            return imgDataURL;
+                return imgDataURL;
+            }
+            else return null;
         }
     }
 }

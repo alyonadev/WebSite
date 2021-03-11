@@ -36,8 +36,7 @@ namespace WebSite.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = _userService.GetAllUsersService().
-                        FirstOrDefault(u => u.Login == login && u.Password == password);
+                    var user = _userService.GetUserService(login, password);
 
                     if (user != null)
                     {
@@ -85,31 +84,20 @@ namespace WebSite.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = _userService.GetAllUsersService().
-                         FirstOrDefault(u => u.Login == addUser.Login && u.Password == addUser.Password);
+                    var user = _userService.GetUserService(addUser.Login, addUser.Password);
 
                     if (user == null)
                     {
-                        if (addUser.Age < 6 || addUser.Age > 80)
-                        {
-                            ViewBag.ErrorMessage = "Invalid age!";
+                        var config = new MapperConfiguration(cfg => cfg.CreateMap<AddUserViewModel, User>());
+                        var mapper = new Mapper(config);
 
-                            return View();
-                        }
-                        else
-                        {
-                            var config = new MapperConfiguration(cfg => cfg.CreateMap<AddUserViewModel, User>());
-                            var mapper = new Mapper(config);
+                        _userService.AddUserService(mapper.Map<AddUserViewModel, User>(addUser));
 
-                            _userService.AddUserService(mapper.Map<AddUserViewModel, User>(addUser));
+                        var userLogin = _userService.GetUserService(addUser.Login, addUser.Password);
 
-                            var userLogin = _userService.GetAllUsersService().
-                                FirstOrDefault(u => u.Login == addUser.Login && u.Password == addUser.Password);
+                        FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
 
-                            FormsAuthentication.SetAuthCookie(userLogin.UserId.ToString(), true);
-
-                            return RedirectToAction("Index", "User");
-                        }                        
+                        return RedirectToAction("Index", "User");
                     }
                     else
                     {

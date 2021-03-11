@@ -14,7 +14,9 @@ namespace Services
     {
         List<User> GetAllUsersService();
 
-        User GetByIdUserService(int id);
+        User GetUserService(int id);
+
+        User GetUserService(string login, string password);
 
         void AddUserService(User item);
 

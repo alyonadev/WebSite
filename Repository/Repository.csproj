@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DialogRepository.cs" />
+    <Compile Include="IDialogRepository.cs" />
     <Compile Include="IMessageRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUserRepository.cs" />

@@ -16,9 +16,11 @@ namespace DBModels
             [Key]
             public Guid DialogId { get; set; }
 
-            public int From { get; set; }
+            [ForeignKey("From")]
+            public User FromUserId { get; set; }
 
-            public int To { get; set; }
+            [ForeignKey("To")]
+            public User ToUserId { get; set; }
         }
     }
 }

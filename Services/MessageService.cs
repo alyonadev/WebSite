@@ -27,38 +27,30 @@ namespace Services
             _messageRepository.Delete(id);
         }
 
-        public List<Message> GetAllUsersMessagesService(int fromId, int toId)
+        public List<Message> GetAllDialogMessagesService(int dialogId)
         {
-            IEnumerable<Message> messageList = _messageRepository.GetAll().Where(v => 
-            (v.From == fromId && v.To == toId) || 
-            (v.From == toId && v.To == fromId));
+            IEnumerable<Message> messageList = _messageRepository.GetAll()
+                .Where(v => v.DialogId == dialogId);
 
             return messageList.ToList();
         }
 
-        public int GetUserUnreadMessagesService(int toId, int fromId)
+        public int GetUnreadMessagesService(int dialogId)
         {
             int countMessage = _messageRepository.GetAll()
-                .Where(v => (v.From == fromId && v.To == toId && v.Status == false)).Count();
+                .Where(v => (v.DialogId == dialogId && v.Status == false)).Count();
 
             return countMessage;
         }
 
-        public string GetLastUserMessagesService(int toId, int fromId)
+        public string GetLastUserMessagesService(int dialogId)
         {
-            var lastMessage = _messageRepository.GetAll().Where(v =>
-            (v.From == fromId && v.To == toId) ||
-            (v.From == toId && v.To == fromId))
-            .LastOrDefault();
+            var lastMessage = _messageRepository.GetAll()
+                .Where(v => v.DialogId == dialogId).LastOrDefault();
 
             string textMessage = lastMessage != null ? lastMessage.Text : "";
 
             return textMessage;
-        }
-
-        public Message GetByIdMessageService(int id)
-        {
-            return _messageRepository.GetById(id);
         }
 
         public void UpdateMessageService(Message item)

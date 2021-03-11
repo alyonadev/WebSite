@@ -5,9 +5,7 @@ namespace Services
 {
     public interface IMessageService
     {
-        List<Message> GetAllUsersMessagesService(int fromId, int toId);
-
-        Message GetByIdMessageService(int id);
+        List<Message> GetAllDialogMessagesService(int dialogId);
 
         void AddMessageService(Message item);
 
@@ -15,8 +13,8 @@ namespace Services
 
         void DeleteMessageService(int id);
 
-        int GetUserUnreadMessagesService(int toId, int fromId); 
+        int GetUnreadMessagesService(int dialogId); 
 
-        string GetLastUserMessagesService(int toId, int fromId);
+        string GetLastUserMessagesService(int dialogId);
     }
 }

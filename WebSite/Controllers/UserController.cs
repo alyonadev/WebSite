@@ -26,12 +26,9 @@ namespace WebSite.Controllers
 
                 if (int.TryParse(User.Identity.Name, out int userId))
                 {
-                    var user = mapper.Map<IndexUserViewModel>(_userService.GetByIdUserService(userId));
+                    var user = mapper.Map<IndexUserViewModel>(_userService.GetUserService(userId));
 
-                    if (user.Photo.Length > 0)
-                    {
-                        user.PhotoUrl = _userService.GetURLPhotoUserService(user.Photo);
-                    }
+                    user.PhotoUrl = _userService.GetURLPhotoUserService(user.Photo);
 
                     return View(user);
                 }
@@ -55,7 +52,7 @@ namespace WebSite.Controllers
 
                 if (int.TryParse(User.Identity.Name, out int userId))
                 {
-                    EditUserViewModel user = mapper.Map<EditUserViewModel>(_userService.GetByIdUserService(userId));
+                    EditUserViewModel user = mapper.Map<EditUserViewModel>(_userService.GetUserService(userId));
 
                     return View(user);
                 }
@@ -76,23 +73,11 @@ namespace WebSite.Controllers
                 var config = new MapperConfiguration(cfg => cfg.CreateMap<EditUserViewModel, User>());
                 var mapper = new Mapper(config);
 
-                if (updatedUser.PhotoFile != null)
-                {
-                    updatedUser.Photo = _userService.GetBytePhotoUserService(updatedUser.PhotoFile);
-                }
+                updatedUser.Photo = _userService.GetBytePhotoUserService(updatedUser.PhotoFile);
 
-                if (updatedUser.Age < 6 || updatedUser.Age > 80)
-                {
-                    ViewBag.ErrorMessage = "Invalid age!";
+                _userService.UpdateUserService(mapper.Map<User>(updatedUser));
 
-                    return View(updatedUser);
-                }
-                else
-                {
-                    _userService.UpdateUserService(mapper.Map<User>(updatedUser));
-
-                    return RedirectToAction("Index", "User");
-                }            
+                return RedirectToAction("Index", "User");
             }
             catch (System.Exception)
             {
@@ -106,8 +91,6 @@ namespace WebSite.Controllers
             {
                 if (int.TryParse(User.Identity.Name, out int userId))
                 {
-                    FormsAuthentication.SignOut();
-
                     _userService.DeleteUserService(userId);
 
                     return RedirectToAction("Login", "Authorization");
