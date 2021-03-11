@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WebSite.Repository
 {
-    public interface IRepository<T> : IDisposable
+    public interface IRepository<T>
     {
         IEnumerable<T> GetAll();
 
